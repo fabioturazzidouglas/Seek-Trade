@@ -1,6 +1,7 @@
 package com.example.seektradeapp;
 
-import java.util.Date;
+
+
 
 public class Post {
     private int postId;
@@ -9,10 +10,12 @@ public class Post {
     private String description;
     private double price;
     private int userId;
-    private Date postDate;
+    private String postDate;
     private String address;
+    private String zipCode;
+    private String[] photos;
 
-    public Post(int postId, String category, String title, String description, double price, int userId, Date postDate, String address, String zipCode) {
+    public Post(int postId, String category, String title, String description, double price, int userId, String postDate, String address, String zipCode, String[] photos) {
         this.postId = postId;
         this.category = category;
         this.title = title;
@@ -22,12 +25,22 @@ public class Post {
         this.postDate = postDate;
         this.address = address;
         this.zipCode = zipCode;
+        this.photos = photos;
+    }
+    public Post(String category, String title, String description, double price, int userId, String postDate, String address, String zipCode, String[] photos) {
+        this.category = category;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.userId = userId;
+        this.postDate = postDate;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.photos = photos;
     }
 
     public Post() {
     }
-
-    private String zipCode;
 
     public int getPostId() {
         return postId;
@@ -77,11 +90,11 @@ public class Post {
         this.userId = userId;
     }
 
-    public Date getPostDate() {
+    public String getPostDate() {
         return postDate;
     }
 
-    public void setPostDate(Date postDate) {
+    public void setPostDate(String postDate) {
         this.postDate = postDate;
     }
 
@@ -99,5 +112,12 @@ public class Post {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+    public String[] getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(String[] photos) {
+        this.photos = photos;
     }
 }

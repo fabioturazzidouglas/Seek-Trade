@@ -1,16 +1,22 @@
 package com.example.seektradeapp;
 
-import java.util.Date;
 
 public class User {
     private int userId;
     private String fullName;
-    private Date registrationDate;
+    private String registrationDate;
     private String email;
     private String password;
 
-    public User(int userId, String fullName, Date registrationDate, String email, String password) {
+    public User(int userId, String fullName, String registrationDate, String email, String password) {
         this.userId = userId;
+        this.fullName = fullName;
+        this.registrationDate = registrationDate;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String fullName, String registrationDate, String email, String password) {
         this.fullName = fullName;
         this.registrationDate = registrationDate;
         this.email = email;
@@ -37,11 +43,11 @@ public class User {
         this.fullName = fullName;
     }
 
-    public Date getRegistrationDate() {
+    public String getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
+    public void setRegistrationDate(String registrationDate) {
         this.registrationDate = registrationDate;
     }
 
