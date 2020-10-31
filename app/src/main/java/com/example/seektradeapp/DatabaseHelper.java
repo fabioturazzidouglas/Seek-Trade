@@ -331,8 +331,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String POSTS_SELECT_QUERY =
                 String.format("SELECT * FROM %s;",
                         TABLE_POSTS);
-        String PHOTOS_SELECT_QUERY;
-        List<String> photoArray = new ArrayList<>();
 
         // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
         // disk space scenarios)
@@ -352,24 +350,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     newPost.setAddress(cursor.getString(cursor.getColumnIndex(KEY_POST_ADDRESS)));
                     newPost.setZipCode(cursor.getString(cursor.getColumnIndex(KEY_POST_ZIPCODE)));
 
-                    try {
-                        PHOTOS_SELECT_QUERY = String.format("SELECT * FROM %s WHERE %s = %s;", TABLE_PHOTOS, KEY_PHOTO_POST_ID_FK, cursor.getInt(cursor.getColumnIndex(KEY_POST_ID)));
-
-                        Cursor cursorPhotos = db.rawQuery(PHOTOS_SELECT_QUERY, null);
-                        if (cursorPhotos.moveToFirst()) {
-                            do {
-                                photoArray.add(cursorPhotos.getString(cursorPhotos.getColumnIndex(KEY_PHOTO_IMG)));
-                            } while (cursorPhotos.moveToNext());
-                        }
-
-
-                        if (!photoArray.isEmpty()) {
-                            newPost.setPhotos(photoArray.toArray(new String[0]));
-                        }
-
-                    } catch (Exception e) {
-                        Log.d(TAG, "Error while trying to get photos from each post from database");
-                    }
+                    newPost.setPhotos(getPhotosByPostId(newPost.getPostId()));
 
                     posts.add(newPost);
                 } while (cursor.moveToNext());
@@ -386,12 +367,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Post getPostById(int postId) {
         Post post = new Post();
-
         // SELECT * FROM POSTS
         // LEFT OUTER JOIN USERS
         // ON POSTS.KEY_POST_USER_ID_FK = USERS.KEY_USER_ID
         String POSTS_SELECT_QUERY =
-                String.format("SELECT * FROM %s WHERE %s = %s",
+                String.format("SELECT * FROM %s WHERE %s = %s;",
                         TABLE_POSTS,
                         KEY_POST_ID, postId);
 
@@ -400,17 +380,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
         try {
+            if (cursor.moveToFirst()) {
+                post.setPostId(cursor.getInt(cursor.getColumnIndex(KEY_POST_ID)));
+                post.setCategory(cursor.getString(cursor.getColumnIndex(KEY_POST_CATEGORY)));
+                post.setTitle(cursor.getString(cursor.getColumnIndex(KEY_POST_TITLE)));
+                post.setDescription(cursor.getString(cursor.getColumnIndex(KEY_POST_CATEGORY)));
+                post.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_POST_PRICE)));
+                post.setUserId(cursor.getInt(cursor.getColumnIndex(KEY_POST_USER_ID_FK)));
+                post.setPostDate(cursor.getString(cursor.getColumnIndex(KEY_POST_POSTDATE)));
+                post.setAddress(cursor.getString(cursor.getColumnIndex(KEY_POST_ADDRESS)));
+                post.setZipCode(cursor.getString(cursor.getColumnIndex(KEY_POST_ZIPCODE)));
 
-            post.setPostId(cursor.getInt(cursor.getColumnIndex(KEY_POST_ID)));
-            post.setCategory(cursor.getString(cursor.getColumnIndex(KEY_POST_CATEGORY)));
-            post.setTitle(cursor.getString(cursor.getColumnIndex(KEY_POST_TITLE)));
-            post.setDescription(cursor.getString(cursor.getColumnIndex(KEY_POST_CATEGORY)));
-            post.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_POST_PRICE)));
-            post.setUserId(cursor.getInt(cursor.getColumnIndex(KEY_POST_USER_ID_FK)));
-            post.setPostDate(cursor.getString(cursor.getColumnIndex(KEY_POST_POSTDATE)));
-            post.setAddress(cursor.getString(cursor.getColumnIndex(KEY_POST_ADDRESS)));
-            post.setZipCode(cursor.getString(cursor.getColumnIndex(KEY_POST_ZIPCODE)));
-
+                post.setPhotos(getPhotosByPostId(post.getPostId()));
+            }
         } catch (Exception e) {
             Log.d(TAG, "Error while trying to get posts from database");
         } finally {
@@ -428,7 +410,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // SELECT * FROM POSTS
         // LEFT OUTER JOIN USERS
         // ON POSTS.KEY_POST_USER_ID_FK = USERS.KEY_USER_ID
-        String POSTS_SELECT_QUERY =
+        String PHOTOS_SELECT_QUERY =
                 String.format("SELECT * FROM %s WHERE %s = %s",
                         TABLE_PHOTOS,
                         KEY_PHOTO_POST_ID_FK, postId);
@@ -436,11 +418,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
         // disk space scenarios)
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
+        Cursor cursor = db.rawQuery(PHOTOS_SELECT_QUERY, null);
         try {
 
-            photoList.add(cursor.getString(cursor.getColumnIndex(KEY_PHOTO_IMG)));
-
+            if (cursor.moveToFirst()) {
+                do {
+                    photoList.add(cursor.getString(cursor.getColumnIndex(KEY_PHOTO_IMG)));
+                } while (cursor.moveToNext());
+            }
 
         } catch (Exception e) {
             Log.d(TAG, "Error while trying to get photos from post " + postId +" from database");
@@ -449,9 +434,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 cursor.close();
             }
         }
-        String[] photoArray = photoList.toArray(new String[0]);
 
-        return photoArray;
+        if(!photoList.isEmpty()) {
+            String[] photoArray = photoList.toArray(new String[0]);
+            return photoArray;
+        } else {
+            return new String[0];
+        }
     }
 
     public User getUserById(int userId) {
@@ -470,13 +459,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
         try {
-
-            user.setUserId(cursor.getInt(cursor.getColumnIndex(KEY_USER_ID)));
-            user.setFullName(cursor.getString(cursor.getColumnIndex(KEY_USER_FULLNAME)));
-            user.setRegistrationDate(cursor.getString(cursor.getColumnIndex(KEY_USER_REGISTRATIONDATE)));
-            user.setEmail(cursor.getString(cursor.getColumnIndex(KEY_USER_EMAIL)));
-            user.setPassword(cursor.getString(cursor.getColumnIndex(KEY_USER_PASSWORD)));
-
+            if (cursor.moveToFirst()) {
+                user.setUserId(cursor.getInt(cursor.getColumnIndex(KEY_USER_ID)));
+                user.setFullName(cursor.getString(cursor.getColumnIndex(KEY_USER_FULLNAME)));
+                user.setRegistrationDate(cursor.getString(cursor.getColumnIndex(KEY_USER_REGISTRATIONDATE)));
+                user.setEmail(cursor.getString(cursor.getColumnIndex(KEY_USER_EMAIL)));
+                user.setPassword(cursor.getString(cursor.getColumnIndex(KEY_USER_PASSWORD)));
+            }
         } catch (Exception e) {
             Log.d(TAG, "Error while trying to get users from database");
         } finally {

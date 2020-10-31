@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
         User printUser = dbHelper.getAllUsers().get(0);
 
         String[] photos = {"1","2","3"};
-        Post post = new Post("Cat", "Title", "Descr", 2, printUser.getUserId(),"10/10/2020","add","zip", photos);
+        String[] photos2 = {"a","b"};
+        Post post = new Post("Cat", "Title", "Descr", 2, printUser.getUserId(),"10/10/2020","add","zip", photos2);
 
         dbHelper.addPost(post, printUser);
 
@@ -39,9 +40,14 @@ public class MainActivity extends AppCompatActivity {
 
         dbHelper.addPhotos(printPost, photos);
 
-        String printPics = Arrays.toString(dbHelper.getPhotosByPostId(printPost.getPostId()));
+        Post searchPost = dbHelper.getPostById(printPost.getPostId());
 
-        txtViewTitle.setText(printPics);
+        txtViewTitle.setText(Arrays.toString(searchPost.getPhotos()) + ", " + searchPost.getTitle());
+
+
+//        String[] printPics = dbHelper.getPhotosByPostId(printPost.getPostId());
+//
+//        txtViewTitle.setText(Arrays.toString(printPics));
 
     }
 }
