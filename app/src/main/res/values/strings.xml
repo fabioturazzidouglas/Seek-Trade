@@ -1,4 +1,24 @@
 <resources>
     <string name="app_name">Seek&amp;TradeApp</string>
     <string name="btn_viewPost">View Post</string>
+    <string name="SearchForPosts">Search Posts</string>
+    <string name="postTitle">Post Title</string>
+    <string name="postPrice">Post Price</string>
+    <string name="postLocation">Post Location</string>
+    <string name="postUser">Post User</string>
+    <string name="postDesc">Post Description</string>
+    <string name="postImage">Post Image</string>
+    <string name="returnToPosts">Return to Posts</string>
+    <string name="postDate">Post Date</string>
+    <string-array name="PostsCategories">
+        <item>All Categories</item>
+        <item>Real Estate</item>
+        <item>Academic</item>
+        <item>Vehicles</item>
+        <item>Services</item>
+        <item>Housing Rental</item>
+        <item>Electronics</item>
+        <item>Clothing</item>
+        <item>Music, Films</item>
+    </string-array>
 </resources>

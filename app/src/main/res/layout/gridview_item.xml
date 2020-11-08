@@ -3,31 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:orientation="vertical">
+    android:layout_height="100dp">
 
     <ImageView
         android:id="@+id/imgView_pic1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_weight="1"
+        android:layout_weight="0.3"
         android:paddingLeft="10dp" />
 
     <TextView
         android:id="@+id/textView_postTitle"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="0.4"
+        android:gravity="left|center_vertical"
         android:paddingLeft="10dp"
         android:text="TextView"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView_price"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="0.3"
+        android:gravity="center"
         android:paddingLeft="10dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="22sp" />
 </LinearLayout>
