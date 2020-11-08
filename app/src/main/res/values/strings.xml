@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Seek&amp;TradeApp</string>
+    <string name="btn_viewPost">View Post</string>
 </resources>
