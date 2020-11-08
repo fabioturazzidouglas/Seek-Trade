@@ -23,19 +23,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     //Create view holder to give access to our view
     // Provide a direct reference to each of the views within a data item
     public static class ViewHolder extends RecyclerView.ViewHolder{
-       // public ImageView imgView_post;
-        public TextView txtView_post_detail;
-        public Button btn_viewPost;
+        public ImageView imgView_pic1;
+
+        public TextView textView_postTitle;
+        public TextView textView_price;
+        //public Button btn_viewPost;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-           // imgView_post = (ImageView) itemView.findViewById(R.id.imgView_post);
-            txtView_post_detail = (TextView) itemView.findViewById(R.id.txtView_post_detail);
-            btn_viewPost = (Button) itemView.findViewById(R.id.btn_viewpost);
+            imgView_pic1 = (ImageView) itemView.findViewById(R.id.imgView_pic1);
+            textView_postTitle = (TextView) itemView.findViewById(R.id.textView_postTitle);
+            textView_price = (TextView) itemView.findViewById(R.id.textView_price);
+            //btn_viewPost = (Button) itemView.findViewById(R.id.btn_viewpost);
         }
     }
 
+    //constructor
     public PostAdapter (List<Post> posts){
         allPosts = posts;
     }
@@ -49,7 +53,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         //inflate custom layout
-        View postView = inflater.inflate(R.layout.singlepostlayout, parent, false);
+        View postView = inflater.inflate(R.layout.gridview_item, parent, false);
 
         ViewHolder viewHolder = new ViewHolder(postView);
         return viewHolder;
@@ -66,13 +70,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         Post post = allPosts.get(position);
 
         //set item views based on the view and data model
-        TextView textView = holder.txtView_post_detail;
-        textView.setText(post.getPostDate());
+        TextView textView_title = holder.textView_postTitle;
+        textView_title.setText(post.getTitle());
 
-//        ImageView imageView = holder.imgView_post;
-//        imageView.setImageResource(post.getPostid());
+        TextView textView_showprice = holder.textView_price;
+        textView_showprice.setText(String.valueOf(post.getPrice()));
 
-        Button btnView = holder.btn_viewPost;
+        ImageView imageView = holder.imgView_pic1;
+        //imageView.setImageResource(post.getPostid());
+
+
+
+
     }
 
     @Override
