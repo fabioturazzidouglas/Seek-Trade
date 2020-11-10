@@ -98,14 +98,13 @@
         android:id="@+id/logoutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="logout"
         android:text="Log-out"
         app:layout_constraintBottom_toTopOf="@+id/toolbar2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listViewPosts"
         app:layout_constraintVertical_bias="0.926"
-        tools:ignore="MissingConstraints,OnClick"
-        android:onClick="logout"/>
+        tools:ignore="MissingConstraints,OnClick" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
