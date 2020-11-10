@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "443873630456",
+    "firebase_url": "https://mobile-v2-9876c.firebaseio.com",
+    "project_id": "mobile-v2-9876c",
+    "storage_bucket": "mobile-v2-9876c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443873630456:android:c43d7a0322e795cba9c30d",
+        "android_client_info": {
+          "package_name": "com.example.seektradeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443873630456-8dfk5oi4h2b6hiifs31btvm1a661nivt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBz8YD-YEkVXEhwT1ZQPZREQ20_SqD71kM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443873630456-8dfk5oi4h2b6hiifs31btvm1a661nivt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
