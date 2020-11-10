@@ -1,8 +1,6 @@
 package com.example.seektradeapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -10,7 +8,6 @@ import android.os.Bundle;
 
 
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -23,7 +20,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class SearchPostsActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
 
     final String TAG = "Search Posts";
@@ -33,16 +30,33 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //Toast.makeText(SearchPostsActivity.class, "Post created", Toast.LENGTH_LONG).show()\\
+        try {
+            String title ="";
+                    getIntent().getExtras().getString("title");
+            if (!title.equals("")) {
+                Toast.makeText(SearchPostsActivity.this, "Post created: " + title, Toast.LENGTH_LONG).show();
+            }
+
+        } catch (Exception ex) {
+            Log.e(TAG, "Cannot get newly created post");
+        }
 
         //Populate posts
         DatabaseHelper dbHelper = DatabaseHelper.getInstance(this);
-        populatePostDatabase();
+//        populatePostDatabase();
         //initialize posts
         List<Post> allActivePosts = dbHelper.getAllPosts();
 
         //look up recyclerview in main layout
         ListView listViewPosts = findViewById(R.id.listViewPosts);
         ImageView searchIcon = findViewById(R.id.imageViewSearchIcon);
+        ImageView addIcon = findViewById(R.id.imageViewAddPost);
         EditText searchedTitle = findViewById(R.id.editTextSearch);
         Spinner spinnerCategory = findViewById(R.id.spinnerCategories);
         //create adapter, pass data
@@ -50,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         //attach adapter to recyclerview
         listViewPosts.setAdapter(myPostAdapter);
 
-
+        //search for post
         searchIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,13 +81,13 @@ public class MainActivity extends AppCompatActivity {
                     firstFilter = false;
                     secondFilter = false;
                     //Log.e(TAG, "Error fetching post");
-                    if(searchedText.equals("") || eachPost.getTitle().contains(searchedText)) {
+                    if (searchedText.equals("") || eachPost.getTitle().contains(searchedText)) {
                         firstFilter = true;
                     }
-                    if(searchedCategory.equals("All Categories") || eachPost.getCategory().equals(searchedCategory)) {
+                    if (searchedCategory.equals("All Categories") || eachPost.getCategory().equals(searchedCategory)) {
                         secondFilter = true;
                     }
-                    if(firstFilter && secondFilter) {
+                    if (firstFilter && secondFilter) {
                         allActivePosts.add(eachPost);
                     }
                 }
@@ -81,22 +95,29 @@ public class MainActivity extends AppCompatActivity {
                 PostAdapter myPostAdapter = new PostAdapter(allActivePosts);
                 //attach adapter to recyclerview
                 listViewPosts.setAdapter(myPostAdapter);
-                Toast.makeText(MainActivity.this, allActivePosts.size() + " posts found!", Toast.LENGTH_LONG).show();
+                Toast.makeText(SearchPostsActivity.this, allActivePosts.size() + " posts found!", Toast.LENGTH_LONG).show();
 
             }
         });
 
+        //add a new post
+        addIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SearchPostsActivity.this, CreatePostActivity.class));
+            }
+        });
+
+        //view individual post
         listViewPosts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-               Post clickedPost = allActivePosts.get(i);
+                Post clickedPost = allActivePosts.get(i);
 
-                Intent goToPost = new Intent(MainActivity.this, PostDetails.class);
-
+                Intent goToPost = new Intent(SearchPostsActivity.this, PostDetails.class);
                 //create Bundle
-                Bundle myBundle =new Bundle();
+                Bundle myBundle = new Bundle();
                 myBundle.putInt("PostId", clickedPost.getPostId());
-
                 goToPost.putExtras(myBundle);
                 startActivity(goToPost);
             }
@@ -129,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
         Post post5 = new Post("Services", "Title5", "Descr", 200, addedUser.getUserId(), "10/10/2020", "add", "zip", photos2);
         Post post6 = new Post("Housing Rental", "Title6", "Descr1", 290, addedUser.getUserId(), "11/11/2010", "add", "zip", photos2);
         Post post7 = new Post("Electronics", "Title7", "Descr", 501, addedUser.getUserId(), "10/10/2020", "add", "zip", photos2);
+        Post posttest = new Post("Electronics", "Title7t", "Descr", 501, addedUser.getUserId(), "10/10/2020", "add", "zip", photos2);
         Post post8 = new Post("Music, Films", "Title8", "Descr1", 2020, addedUser.getUserId(), "11/11/2010", "add", "zip", photos2);
         allActivePosts.add(post1);
         allActivePosts.add(post2);
@@ -138,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
         allActivePosts.add(post6);
         allActivePosts.add(post7);
         allActivePosts.add(post8);
+        allActivePosts.add(posttest);
 
         for (Post post : allActivePosts) {
             dbHelper.addPost(post, addedUser);

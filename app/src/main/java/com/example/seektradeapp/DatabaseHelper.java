@@ -343,7 +343,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     newPost.setPostId(cursor.getInt(cursor.getColumnIndex(KEY_POST_ID)));
                     newPost.setCategory(cursor.getString(cursor.getColumnIndex(KEY_POST_CATEGORY)));
                     newPost.setTitle(cursor.getString(cursor.getColumnIndex(KEY_POST_TITLE)));
-                    newPost.setDescription(cursor.getString(cursor.getColumnIndex(KEY_POST_CATEGORY)));
+                    newPost.setDescription(cursor.getString(cursor.getColumnIndex(KEY_POST_DESCRIPTION)));
                     newPost.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_POST_PRICE)));
                     newPost.setUserId(cursor.getInt(cursor.getColumnIndex(KEY_POST_USER_ID_FK)));
                     newPost.setPostDate(cursor.getString(cursor.getColumnIndex(KEY_POST_POSTDATE)));
@@ -384,7 +384,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 post.setPostId(cursor.getInt(cursor.getColumnIndex(KEY_POST_ID)));
                 post.setCategory(cursor.getString(cursor.getColumnIndex(KEY_POST_CATEGORY)));
                 post.setTitle(cursor.getString(cursor.getColumnIndex(KEY_POST_TITLE)));
-                post.setDescription(cursor.getString(cursor.getColumnIndex(KEY_POST_CATEGORY)));
+                post.setDescription(cursor.getString(cursor.getColumnIndex(KEY_POST_DESCRIPTION)));
                 post.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_POST_PRICE)));
                 post.setUserId(cursor.getInt(cursor.getColumnIndex(KEY_POST_USER_ID_FK)));
                 post.setPostDate(cursor.getString(cursor.getColumnIndex(KEY_POST_POSTDATE)));

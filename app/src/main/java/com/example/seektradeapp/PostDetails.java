@@ -46,7 +46,7 @@ public class PostDetails extends AppCompatActivity {
         imageViewReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToMain= new Intent(PostDetails.this, MainActivity.class);
+                Intent goToMain= new Intent(PostDetails.this, SearchPostsActivity.class);
                 startActivity(goToMain);
 
             }
