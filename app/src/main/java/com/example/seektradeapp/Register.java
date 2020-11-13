@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Register extends AppCompatActivity {
 
-    EditText newUserFullName, email, pass, phone;
+    EditText newUserFullName, email, pass, confPass, phone;
     Button regBtn;
     TextView goToLogin;
     FirebaseAuth fAuth;
@@ -34,6 +34,7 @@ public class Register extends AppCompatActivity {
         newUserFullName = findViewById(R.id.newUserFullName);
         email = findViewById(R.id.textEmail);
         pass = findViewById(R.id.textPassword);
+        confPass = findViewById(R.id.confirmPassword);
         phone = findViewById(R.id.textPhone);
         regBtn = findViewById(R.id.regBtn);
         goToLogin = findViewById(R.id.textViewToLogin);
@@ -51,6 +52,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
                 String nEmail = email.getText().toString().trim();
                 String password = pass.getText().toString();
+                String confirmPass = confPass.getText().toString();
 
                 if(TextUtils.isEmpty(nEmail)) {
                     email.setError("Email is Required.");
@@ -64,6 +66,16 @@ public class Register extends AppCompatActivity {
 
                 if(password.length() < 6) {
                     pass.setError("Password Must have more than 6 Characters");
+                }
+
+                if (TextUtils.isEmpty(confirmPass)) {
+                    confPass.setError("Please, confirm your password.");
+                    return;
+                }
+
+                if (confirmPass.compareTo(password) != 0) {
+                    confPass.setError("Passwords do not match.");
+                    return;
                 }
 
                 progBar.setVisibility(View.VISIBLE);
