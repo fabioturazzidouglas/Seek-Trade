@@ -11,13 +11,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.List;
 
 public class ViewMyPosts extends AppCompatActivity {
     TextView user;
     ListView listViewallMyPosts;
     List<Post> allMyPosts;
-
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +27,26 @@ public class ViewMyPosts extends AppCompatActivity {
         setContentView(R.layout.activity_view_my_posts);
 
         //get user id/email
+        fAuth = FirebaseAuth.getInstance();
 
-        //populate posts from db
+        if(fAuth.getCurrentUser() == null) {
+            startActivity(new Intent(getApplicationContext(), Login.class));
+            finish();
+        }
 
+        String userEmail = fAuth.getCurrentUser().getEmail();
+
+        //Instantiate database helper
+        DatabaseHelper dbHelper = DatabaseHelper.getInstance(this);
+        //initialize posts
+        User currUser = dbHelper.getUserByEmail(userEmail);
+        //NEED FIX: populate posts from db
+        allMyPosts = dbHelper.getAllPosts();
         //get items from layout
         user = findViewById(R.id.textViewUserName);
+        //set full name
+        user.setText(currUser.getFullName());
+
         listViewallMyPosts = findViewById(R.id.listViewListMyPosts);
         //set adapter
         MyPostAdapter myAdapter = new MyPostAdapter(allMyPosts);
