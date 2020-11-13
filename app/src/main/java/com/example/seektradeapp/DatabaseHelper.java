@@ -336,6 +336,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return post;
     }
 
+
+    public List<Post> getPostsByUserEmail(String userEmail) {
+        List<Post> posts = new ArrayList<>();
+
+        String POSTS_SELECT_QUERY =
+                String.format("SELECT * FROM %s WHERE %s = %s;",
+                        TABLE_POSTS,
+                        KEY_POST_USER_EMAIL_FK, userEmail);
+
+        // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
+        // disk space scenarios)
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Post newPost = new Post();
+                    newPost.setPostId(cursor.getInt(cursor.getColumnIndex(KEY_POST_ID)));
+                    newPost.setCategory(cursor.getString(cursor.getColumnIndex(KEY_POST_CATEGORY)));
+                    newPost.setTitle(cursor.getString(cursor.getColumnIndex(KEY_POST_TITLE)));
+                    newPost.setDescription(cursor.getString(cursor.getColumnIndex(KEY_POST_DESCRIPTION)));
+                    newPost.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_POST_PRICE)));
+                    newPost.setUserEmail(cursor.getString(cursor.getColumnIndex(KEY_POST_USER_EMAIL_FK)));
+                    newPost.setPostDate(cursor.getString(cursor.getColumnIndex(KEY_POST_POSTDATE)));
+                    newPost.setAddress(cursor.getString(cursor.getColumnIndex(KEY_POST_ADDRESS)));
+                    newPost.setZipCode(cursor.getString(cursor.getColumnIndex(KEY_POST_ZIPCODE)));
+                    newPost.setPhoto(cursor.getString(cursor.getColumnIndex(KEY_POST_PHOTO)));
+
+                    posts.add(newPost);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to get posts from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return posts;
+    }
+
     public User getUserByEmail(String userEmail) {
         User user = new User();
 
