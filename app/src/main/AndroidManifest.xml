@@ -14,13 +14,14 @@
 
         <activity android:name=".ModifyMyPost"></activity>
         <activity android:name=".ViewMyPosts" />
-        <activity android:name=".Login" />
-        <activity android:name=".Register">
+        <activity android:name=".UserProfile"></activity>
+        <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Register" />
         <activity android:name=".MainActivity" />
         <activity android:name=".PostPreview" />
         <activity android:name=".CreatePostActivity" />
