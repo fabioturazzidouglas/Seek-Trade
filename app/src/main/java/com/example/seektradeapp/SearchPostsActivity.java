@@ -52,7 +52,7 @@ public class SearchPostsActivity extends AppCompatActivity {
         //initialize posts
         List<Post> allActivePosts = dbHelper.getAllPosts();
 
-        //look up recyclerview in main layout
+        //look up list in main layout
         ListView listViewPosts = findViewById(R.id.listViewPosts);
         ImageView searchIcon = findViewById(R.id.imageViewSearchIcon);
         ImageView addIcon = findViewById(R.id.imageViewAddPost);
