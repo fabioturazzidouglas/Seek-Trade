@@ -9,7 +9,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class PostDetails extends AppCompatActivity {
+
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +28,12 @@ public class PostDetails extends AppCompatActivity {
         TextView textViewPostDate = findViewById(R.id.textViewPostDate);
         TextView textViewCategory = findViewById(R.id.textViewCategory);
         ImageView imageViewReturn = findViewById(R.id.imageViewReturn);
+        fAuth = FirebaseAuth.getInstance();
 
         try {
             int postId = getIntent().getExtras().getInt("PostId");
             Post thisPost = dbHelper.getPostById(postId);
-            User thisUser = dbHelper.getUserById(thisPost.getUserId());
+            User thisUser = dbHelper.getUserByEmail(fAuth.getCurrentUser().getEmail());
 
 
             textViewPostTitle.setText(thisPost.getTitle());

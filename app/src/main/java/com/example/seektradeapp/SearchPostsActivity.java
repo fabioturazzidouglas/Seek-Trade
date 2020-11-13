@@ -29,7 +29,7 @@ public class SearchPostsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_search_posts);
     }
     @Override
     protected void onResume() {
@@ -47,9 +47,8 @@ public class SearchPostsActivity extends AppCompatActivity {
             Log.e(TAG, "Cannot get newly created post");
         }
 
-        //Populate posts
+        //Instantiate database helper
         DatabaseHelper dbHelper = DatabaseHelper.getInstance(this);
-//        populatePostDatabase();
         //initialize posts
         List<Post> allActivePosts = dbHelper.getAllPosts();
 
@@ -122,50 +121,6 @@ public class SearchPostsActivity extends AppCompatActivity {
                 startActivity(goToPost);
             }
         });
-
-
-    }
-
-    public void populatePostDatabase() {
-
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(this);
-        dbHelper.resetDB();
-
-        List<Post> allActivePosts = new ArrayList<Post>();
-
-
-        String[] photos = {"1", "2", "3"};
-        String[] photos2 = {"a", "b"};
-
-        User user = new User("Fabio", "10/10/2020", "fabio@email", "123");
-
-        dbHelper.addOrUpdateUser(user);
-
-        User addedUser = dbHelper.getAllUsers().get(0);
-
-        Post post1 = new Post("Real Estate", "Title1", "Descr", 2, addedUser.getUserId(), "10/10/2020", "add", "zip", photos2);
-        Post post2 = new Post("Academic", "Title2", "Descr1", 20, addedUser.getUserId(), "11/11/2010", "add", "zip", photos2);
-        Post post3 = new Post("Academic", "Title3", "Descr", 50, addedUser.getUserId(), "10/10/2020", "add", "zip", photos2);
-        Post post4 = new Post("Vehicles", "Title4", "Descr1", 200, addedUser.getUserId(), "11/11/2010", "add", "zip", photos2);
-        Post post5 = new Post("Services", "Title5", "Descr", 200, addedUser.getUserId(), "10/10/2020", "add", "zip", photos2);
-        Post post6 = new Post("Housing Rental", "Title6", "Descr1", 290, addedUser.getUserId(), "11/11/2010", "add", "zip", photos2);
-        Post post7 = new Post("Electronics", "Title7", "Descr", 501, addedUser.getUserId(), "10/10/2020", "add", "zip", photos2);
-        Post posttest = new Post("Electronics", "Title7t", "Descr", 501, addedUser.getUserId(), "10/10/2020", "add", "zip", photos2);
-        Post post8 = new Post("Music, Films", "Title8", "Descr1", 2020, addedUser.getUserId(), "11/11/2010", "add", "zip", photos2);
-        allActivePosts.add(post1);
-        allActivePosts.add(post2);
-        allActivePosts.add(post3);
-        allActivePosts.add(post4);
-        allActivePosts.add(post5);
-        allActivePosts.add(post6);
-        allActivePosts.add(post7);
-        allActivePosts.add(post8);
-        allActivePosts.add(posttest);
-
-        for (Post post : allActivePosts) {
-            dbHelper.addPost(post, addedUser);
-//            dbHelper.addPhotos(post, photos);
-        }
 
 
     }

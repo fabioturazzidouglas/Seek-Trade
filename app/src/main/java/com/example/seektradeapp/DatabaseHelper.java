@@ -20,11 +20,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Table Names
     private static final String TABLE_POSTS = "posts";
     private static final String TABLE_USERS = "users";
-    private static final String TABLE_PHOTOS = "photos";
 
     // Post Table Columns
     private static final String KEY_POST_ID = "postId";
-    private static final String KEY_POST_USER_ID_FK = "userId";
+    private static final String KEY_POST_USER_EMAIL_FK = "email";
     private static final String KEY_POST_CATEGORY = "category";
     private static final String KEY_POST_TITLE = "title";
     private static final String KEY_POST_DESCRIPTION = "description";
@@ -32,6 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_POST_POSTDATE = "postDate";
     private static final String KEY_POST_ADDRESS = "address";
     private static final String KEY_POST_ZIPCODE = "zipCode";
+    private static final String KEY_POST_PHOTO = "photo";
 
 
     // User Table Columns
@@ -42,9 +42,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_USER_PASSWORD = "password";
     private static final String TAG = "Database_Helper";
 
-    private static final String KEY_PHOTO_ID = "photoId";
-    private static final String KEY_PHOTO_IMG = "photoImg";
-    private static final String KEY_PHOTO_POST_ID_FK = "postId";
+//    private static final String KEY_PHOTO_ID = "photoId";
+//    private static final String KEY_PHOTO_IMG = "photoImg";
+//    private static final String KEY_PHOTO_POST_ID_FK = "postId";
 
 
     // Called when the database connection is being configured.
@@ -62,40 +62,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String CREATE_POSTS_TABLE = "CREATE TABLE " + TABLE_POSTS +
                 "(" +
                 KEY_POST_ID + " INTEGER PRIMARY KEY," + // Define a primary key
-                KEY_POST_USER_ID_FK + " INTEGER REFERENCES " + TABLE_USERS + "(" + KEY_USER_ID + ")," + // Define a foreign key
+                KEY_POST_USER_EMAIL_FK + " STRING REFERENCES " + TABLE_USERS + "(" + KEY_USER_EMAIL + ")," + // Define a foreign key
                 KEY_POST_CATEGORY + " VARCHAR(30)," +
                 KEY_POST_TITLE + " VARCHAR(30)," +
                 KEY_POST_DESCRIPTION + " VARCHAR(100)," +
                 KEY_POST_PRICE + " DOUBLE," +
                 KEY_POST_POSTDATE + " DATE," +
                 KEY_POST_ADDRESS + " VARCHAR(50)," +
-                KEY_POST_ZIPCODE + " VARCHAR(20)" +
+                KEY_POST_ZIPCODE + " VARCHAR(20)," +
+                KEY_POST_PHOTO + " VARCHAR(40)" +
                 ")";
 
 
         String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS +
                 "(" +
-                KEY_USER_ID + " INTEGER PRIMARY KEY," +
+                KEY_USER_ID + " VARCHAR(50)," +
                 KEY_USER_FULLNAME + " VARCHAR(30)," +
                 KEY_USER_REGISTRATIONDATE + " DATE," +
-                KEY_USER_EMAIL + " VARCHAR(30)," +
+                KEY_USER_EMAIL + " VARCHAR(30) PRIMARY KEY," +
                 KEY_USER_PASSWORD + " VARCHAR(30)" +
                 ")";
 
-        String CREATE_PHOTOS_TABLE = "CREATE TABLE " + TABLE_PHOTOS +
-                "(" +
-                KEY_PHOTO_ID + " INTEGER PRIMARY KEY," +
-                KEY_PHOTO_IMG + " VARCHAR(50)," +
-                KEY_PHOTO_POST_ID_FK + " INTEGER REFERENCES " + TABLE_POSTS + "(" + KEY_POST_ID + ")" +
-                ")";
-
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PHOTOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_POSTS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
 
         db.execSQL(CREATE_USERS_TABLE);
         db.execSQL(CREATE_POSTS_TABLE);
-        db.execSQL(CREATE_PHOTOS_TABLE);
     }
 
     // Called when the database needs to be upgraded.
@@ -105,7 +97,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion != newVersion) {
             // Simplest implementation is to drop all old tables and recreate them
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_PHOTOS);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_POSTS);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
 
@@ -115,9 +106,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void resetDB() {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PHOTOS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_POSTS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + "photos");
 
         // Simplest implementation is to drop all old tables and recreate them
         onCreate(db);
@@ -150,7 +141,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Insert a post into the database
-    public void addPost(Post post, User user) {
+    public void addPost(Post post, String userEmail) {
         // Create and/or open the database for writing
         SQLiteDatabase db = getWritableDatabase();
 
@@ -162,7 +153,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //            long userId = addOrUpdateUser(post.user);
 
             ContentValues values = new ContentValues();
-            values.put(KEY_POST_USER_ID_FK, user.getUserId());
+            values.put(KEY_POST_USER_EMAIL_FK, userEmail);
             values.put(KEY_POST_CATEGORY, post.getCategory());
             values.put(KEY_POST_TITLE, post.getTitle());
             values.put(KEY_POST_DESCRIPTION, post.getDescription());
@@ -170,6 +161,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(KEY_POST_POSTDATE, post.getPostDate());
             values.put(KEY_POST_ADDRESS, post.getAddress());
             values.put(KEY_POST_ZIPCODE, post.getZipCode());
+            values.put(KEY_POST_PHOTO, post.getPhoto());
 
             // Notice how we haven't specified the primary key. SQLite auto increments the primary key column.
             db.insertOrThrow(TABLE_POSTS, null, values);
@@ -180,38 +172,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.endTransaction();
         }
     }
-
-    // Insert a post into the database
-    public void addPhotos(Post post, String[] photos) {
-        // Create and/or open the database for writing
-        SQLiteDatabase db = getWritableDatabase();
-
-        // It's a good idea to wrap our insert in a transaction. This helps with performance and ensures
-        // consistency of the database.
-        db.beginTransaction();
-        try {
-
-            //Add photos corresponding to the post to database
-            ContentValues values = new ContentValues();
-
-            for (int i = 0; i < photos.length; i++) {
-//                photoInsert.clear();
-                values.put(KEY_PHOTO_POST_ID_FK, post.getPostId());
-                values.put(KEY_PHOTO_IMG, photos[i]);
-                db.insertOrThrow(TABLE_PHOTOS, null, values);
-            }
-
-
-            // Notice how we haven't specified the primary key. SQLite auto increments the primary key column.
-
-            db.setTransactionSuccessful();
-        } catch (Exception e) {
-            Log.d(TAG, "Error while trying to add photos to database");
-        } finally {
-            db.endTransaction();
-        }
-    }
-
 
     // Insert or update a user in the database
     // Since SQLite doesn't support "upsert" we need to fall back on an attempt to UPDATE (in case the
@@ -227,7 +187,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.beginTransaction();
         try {
             ContentValues values = new ContentValues();
-            values.put(KEY_POST_USER_ID_FK, post.getUserId());
+            values.put(KEY_POST_USER_EMAIL_FK, post.getUserEmail());
             values.put(KEY_POST_CATEGORY, post.getCategory());
             values.put(KEY_POST_TITLE, post.getTitle());
             values.put(KEY_POST_DESCRIPTION, post.getDescription());
@@ -235,6 +195,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(KEY_POST_POSTDATE, post.getPostDate());
             values.put(KEY_POST_ADDRESS, post.getAddress());
             values.put(KEY_POST_ZIPCODE, post.getZipCode());
+            values.put(KEY_POST_PHOTO, post.getPhoto());
 
             // First try to update the user in case the user already exists in the database
             // This assumes userNames are unique
@@ -249,32 +210,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return post.getPostId();
     }
 
-    public long updatePhotos(Post post, String[] photos) {
-        // The database connection is cached so it's not expensive to call getWriteableDatabase() multiple times.
-        SQLiteDatabase db = getWritableDatabase();
-
-        db.beginTransaction();
-        try {
-            ContentValues values = new ContentValues();
-            db.delete(TABLE_PHOTOS, KEY_PHOTO_POST_ID_FK + "= ?", new String[]{String.valueOf(post.getPostId())});
-
-            //Add photos corresponding to the post to database
-            ContentValues photoInsert = new ContentValues();
-
-            for (int i = 0; i < photos.length; i++) {
-                photoInsert.clear();
-                photoInsert.put(KEY_PHOTO_POST_ID_FK, post.getPostId());
-                photoInsert.put(KEY_PHOTO_IMG, photos[i]);
-                db.insertOrThrow(TABLE_PHOTOS, null, photoInsert);
-            }
-
-        } catch (Exception e) {
-            Log.d(TAG, "Error while trying to update photos");
-        } finally {
-            db.endTransaction();
-        }
-        return post.getPostId();
-    }
 
     public long addOrUpdateUser(User user) {
         // The database connection is cached so it's not expensive to call getWriteableDatabase() multiple times.
@@ -290,7 +225,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(KEY_USER_PASSWORD, user.getPassword());
 
             // First try to update the user in case the user already exists in the database
-            // This assumes userNames are unique
+            // This assumes userEmail are unique
             int rows = db.update(TABLE_USERS, values, KEY_USER_EMAIL + "= ?", new String[]{user.getEmail()});
 
             // Check if update succeeded
@@ -345,12 +280,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     newPost.setTitle(cursor.getString(cursor.getColumnIndex(KEY_POST_TITLE)));
                     newPost.setDescription(cursor.getString(cursor.getColumnIndex(KEY_POST_DESCRIPTION)));
                     newPost.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_POST_PRICE)));
-                    newPost.setUserId(cursor.getInt(cursor.getColumnIndex(KEY_POST_USER_ID_FK)));
+                    newPost.setUserEmail(cursor.getString(cursor.getColumnIndex(KEY_POST_USER_EMAIL_FK)));
                     newPost.setPostDate(cursor.getString(cursor.getColumnIndex(KEY_POST_POSTDATE)));
                     newPost.setAddress(cursor.getString(cursor.getColumnIndex(KEY_POST_ADDRESS)));
                     newPost.setZipCode(cursor.getString(cursor.getColumnIndex(KEY_POST_ZIPCODE)));
-
-                    newPost.setPhotos(getPhotosByPostId(newPost.getPostId()));
+                    newPost.setPhoto(cursor.getString(cursor.getColumnIndex(KEY_POST_PHOTO)));
 
                     posts.add(newPost);
                 } while (cursor.moveToNext());
@@ -386,12 +320,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 post.setTitle(cursor.getString(cursor.getColumnIndex(KEY_POST_TITLE)));
                 post.setDescription(cursor.getString(cursor.getColumnIndex(KEY_POST_DESCRIPTION)));
                 post.setPrice(cursor.getDouble(cursor.getColumnIndex(KEY_POST_PRICE)));
-                post.setUserId(cursor.getInt(cursor.getColumnIndex(KEY_POST_USER_ID_FK)));
+                post.setUserEmail(cursor.getString(cursor.getColumnIndex(KEY_POST_USER_EMAIL_FK)));
                 post.setPostDate(cursor.getString(cursor.getColumnIndex(KEY_POST_POSTDATE)));
                 post.setAddress(cursor.getString(cursor.getColumnIndex(KEY_POST_ADDRESS)));
                 post.setZipCode(cursor.getString(cursor.getColumnIndex(KEY_POST_ZIPCODE)));
-
-                post.setPhotos(getPhotosByPostId(post.getPostId()));
+                post.setPhoto(cursor.getString(cursor.getColumnIndex(KEY_POST_PHOTO)));
             }
         } catch (Exception e) {
             Log.d(TAG, "Error while trying to get posts from database");
@@ -403,47 +336,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return post;
     }
 
-    public String[] getPhotosByPostId(int postId) {
-
-        List<String> photoList = new ArrayList<>();
-
-        // SELECT * FROM POSTS
-        // LEFT OUTER JOIN USERS
-        // ON POSTS.KEY_POST_USER_ID_FK = USERS.KEY_USER_ID
-        String PHOTOS_SELECT_QUERY =
-                String.format("SELECT * FROM %s WHERE %s = %s",
-                        TABLE_PHOTOS,
-                        KEY_PHOTO_POST_ID_FK, postId);
-
-        // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
-        // disk space scenarios)
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(PHOTOS_SELECT_QUERY, null);
-        try {
-
-            if (cursor.moveToFirst()) {
-                do {
-                    photoList.add(cursor.getString(cursor.getColumnIndex(KEY_PHOTO_IMG)));
-                } while (cursor.moveToNext());
-            }
-
-        } catch (Exception e) {
-            Log.d(TAG, "Error while trying to get photos from post " + postId +" from database");
-        } finally {
-            if (cursor != null && !cursor.isClosed()) {
-                cursor.close();
-            }
-        }
-
-        if(!photoList.isEmpty()) {
-            String[] photoArray = photoList.toArray(new String[0]);
-            return photoArray;
-        } else {
-            return new String[0];
-        }
-    }
-
-    public User getUserById(int userId) {
+    public User getUserByEmail(String userEmail) {
         User user = new User();
 
         // SELECT * FROM POSTS
@@ -452,7 +345,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String POSTS_SELECT_QUERY =
                 String.format("SELECT * FROM %s WHERE %s = %s",
                         TABLE_USERS,
-                        KEY_USER_ID, userId);
+                        KEY_USER_EMAIL, userEmail);
 
         // "getReadableDatabase()" and "getWriteableDatabase()" return the same object (except under low
         // disk space scenarios)
@@ -460,7 +353,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(POSTS_SELECT_QUERY, null);
         try {
             if (cursor.moveToFirst()) {
-                user.setUserId(cursor.getInt(cursor.getColumnIndex(KEY_USER_ID)));
+                user.setUserId(cursor.getString(cursor.getColumnIndex(KEY_USER_ID)));
                 user.setFullName(cursor.getString(cursor.getColumnIndex(KEY_USER_FULLNAME)));
                 user.setRegistrationDate(cursor.getString(cursor.getColumnIndex(KEY_USER_REGISTRATIONDATE)));
                 user.setEmail(cursor.getString(cursor.getColumnIndex(KEY_USER_EMAIL)));
@@ -494,7 +387,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 do {
                     User newUser = new User();
-                    newUser.setUserId(cursor.getInt(cursor.getColumnIndex(KEY_USER_ID)));
+                    newUser.setUserId(cursor.getString(cursor.getColumnIndex(KEY_USER_ID)));
                     newUser.setFullName(cursor.getString(cursor.getColumnIndex(KEY_USER_FULLNAME)));
                     newUser.setRegistrationDate(cursor.getString(cursor.getColumnIndex(KEY_USER_REGISTRATIONDATE)));
                     newUser.setEmail(cursor.getString(cursor.getColumnIndex(KEY_USER_EMAIL)));
@@ -520,7 +413,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // Order of deletions is important when foreign key relationships exist.
             db.delete(TABLE_POSTS, null, null);
             db.delete(TABLE_USERS, null, null);
-            db.delete(TABLE_PHOTOS, null, null);
             db.setTransactionSuccessful();
         } catch (Exception e) {
             Log.d(TAG, "Error while trying to delete all posts and users");

@@ -10,34 +10,34 @@ public class Post {
     private String title;
     private String description;
     private double price;
-    private int userId;
+    private String userEmail;
     private String postDate;
     private String address;
     private String zipCode;
-    private String[] photos;
+    private String photo;
 
-    public Post(int postId, String category, String title, String description, double price, int userId, String postDate, String address, String zipCode, String[] photos) {
+    public Post(int postId, String category, String title, String description, double price, String userEmail, String postDate, String address, String zipCode, String photo) {
         this.postId = postId;
         this.category = category;
         this.title = title;
         this.description = description;
         this.price = price;
-        this.userId = userId;
+        this.userEmail = userEmail;
         this.postDate = postDate;
         this.address = address;
         this.zipCode = zipCode;
-        this.photos = photos;
+        this.photo = photo;
     }
-    public Post(String category, String title, String description, double price, int userId, String postDate, String address, String zipCode, String[] photos) {
+    public Post(String category, String title, String description, double price, String userEmail, String postDate, String address, String zipCode, String photo) {
         this.category = category;
         this.title = title;
         this.description = description;
         this.price = price;
-        this.userId = userId;
+        this.userEmail = userEmail;
         this.postDate = postDate;
         this.address = address;
         this.zipCode = zipCode;
-        this.photos = photos;
+        this.photo = photo;
     }
 
     public Post() {
@@ -83,12 +83,12 @@ public class Post {
         this.price = price;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
 
     }
 
@@ -115,13 +115,13 @@ public class Post {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
-    public String[] getPhotos() {
-        return photos;
+    public String getPhoto() {
+        return photo;
     }
 
 
-    public void setPhotos(String[] photos) {
-        this.photos = photos;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
 }

@@ -2,13 +2,13 @@ package com.example.seektradeapp;
 
 
 public class User {
-    private int userId;
+    private String userId;
     private String fullName;
     private String registrationDate;
     private String email;
     private String password;
 
-    public User(int userId, String fullName, String registrationDate, String email, String password) {
+    public User(String userId, String fullName, String registrationDate, String email, String password) {
         this.userId = userId;
         this.fullName = fullName;
         this.registrationDate = registrationDate;
@@ -27,11 +27,11 @@ public class User {
 
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

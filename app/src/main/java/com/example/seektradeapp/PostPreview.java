@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.text.SimpleDateFormat;
 
 import java.util.Calendar;
@@ -26,6 +28,7 @@ public class PostPreview extends AppCompatActivity {
     String cat;
     String address;
     String zipcode;
+    FirebaseAuth fAuth;
     DatabaseHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,10 @@ public class PostPreview extends AppCompatActivity {
         ImageView imageViewPreviewPic = findViewById(R.id.imageViewPreview);
         Button backtoEdit = findViewById(R.id.buttonBackToEdit);
         Button publish = findViewById(R.id.buttonPublishPost);
+        fAuth = FirebaseAuth.getInstance();
+        Date d = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat(("yyyy-MM-dd"), Locale.getDefault());
+        String date = df.format(d);
 
         try {
             price = getIntent().getExtras().getDouble("PRICE");
@@ -51,6 +58,8 @@ public class PostPreview extends AppCompatActivity {
             address = getIntent().getExtras().getString("ADD");
             zipcode = getIntent().getExtras().getString("ZIP");
 
+            textViewPostDate.setText(date);
+            textViewUser.setText(fAuth.getCurrentUser().getEmail());
             textViewPostTitle.setText(postTitle);
             textViewDetails.setText(postDesc);
             textViewPrice.setText("$" + price);
@@ -82,25 +91,20 @@ public class PostPreview extends AppCompatActivity {
 
                     Log.e(TAG, "$" + price);
 
-                    //get userid
-                    int userid=0;
                     //create post
-                    //int userId, String fullName, String registrationDate, String email, String password)
                     //User user = new User("Fabio", "10/10/2020", "fabio@email", "123");
-                    User thisUser = dbHelper.getAllUsers().get(0);
                     Date d = Calendar.getInstance().getTime();
                     SimpleDateFormat df = new SimpleDateFormat(("yyyy-MM-dd"), Locale.getDefault());
                     String date = df.format(d);
-//                    String date = "10/10/2020";
-                    String[] photos = {"a", "b"};
+
+//                    Set photo from FB
+                    String photo = "photo";
                     //String category, String title, String description, double price, int userId, String postDate, String address, String zipCode, String[] photos) {
-                    Post newPost = new Post(cat,postTitle, postDesc, price,  userid, date, address, zipcode,photos );
+                    Post newPost = new Post(cat,postTitle, postDesc, price,  fAuth.getCurrentUser().getEmail(), date, address, zipcode,photo );
 
 
-//                    User user = new User("Fabio", "10/10/2020", "fabio@email", "123");
-//                   Post post1 = new Post("Real Estate", "Title test2", "Descr", 2, addedUser.getUserId(), "10/10/2020", "add", "zip", photos2);
-
-                      dbHelper.addPost(newPost, thisUser);
+                    //Add Post to the database
+                    dbHelper.addPost(newPost,  fAuth.getCurrentUser().getEmail());
 
                     Intent myIntent = new Intent(PostPreview.this, SearchPostsActivity.class);
                     Bundle myBundle = new Bundle();
@@ -114,8 +118,5 @@ public class PostPreview extends AppCompatActivity {
         } catch (Exception ex) {
             Log.e(TAG, ex.getMessage());
         }
-
-
-
     }
 }
