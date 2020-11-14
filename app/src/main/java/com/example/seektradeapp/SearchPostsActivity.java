@@ -10,11 +10,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -58,6 +61,7 @@ public class SearchPostsActivity extends AppCompatActivity {
         ImageView addIcon = findViewById(R.id.imageViewAddPost);
         EditText searchedTitle = findViewById(R.id.editTextSearch);
         Spinner spinnerCategory = findViewById(R.id.spinnerCategories);
+        Button profileBtn = findViewById(R.id.showProfileBtn);
         //create adapter, pass data
         PostAdapter myPostAdapter = new PostAdapter(allActivePosts);
         //attach adapter to recyclerview
@@ -99,11 +103,21 @@ public class SearchPostsActivity extends AppCompatActivity {
             }
         });
 
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance();
+                Log.d("Test", "Test sucs");
+                startActivity(new Intent(SearchPostsActivity.this, UserProfile.class));
+
+            }
+        });
+
         //add a new post
         addIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SearchPostsActivity.this, CreatePostActivity.class));
+                startActivity(new Intent(getApplicationContext(), CreatePostActivity.class));
             }
         });
 
@@ -124,4 +138,10 @@ public class SearchPostsActivity extends AppCompatActivity {
 
 
     }
+
+//    public void showProfile(View view) {
+//        FirebaseAuth.getInstance();
+//        startActivity(new Intent(getApplicationContext(), UserProfile.class));
+//        finish();
+//    }
 }

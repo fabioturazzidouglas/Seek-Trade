@@ -343,7 +343,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // LEFT OUTER JOIN USERS
         // ON POSTS.KEY_POST_USER_ID_FK = USERS.KEY_USER_ID
         String POSTS_SELECT_QUERY =
-                String.format("SELECT * FROM %s WHERE %s = %s",
+                String.format("SELECT * FROM %s WHERE %s = '%s'",
                         TABLE_USERS,
                         KEY_USER_EMAIL, userEmail);
 
@@ -419,6 +419,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } finally {
             db.endTransaction();
         }
+    }
+
+    public void deleteUserWithEmail(String email) {
+        String DELETE_USER_QUERY =
+                String.format("DELETE FROM users WHERE email = '%s'",
+                        TABLE_USERS, KEY_USER_EMAIL, email);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.rawQuery(DELETE_USER_QUERY, null);
+//        try {
+//            db.delete(TABLE_POSTS, null, null);
+//            db.delete(TABLE_USERS, null, null);
+//        } catch (Exception e) {
+//            Log.d(TAG, "Error while trying to delete all posts and users");
+//        } finally {
+//            db.close();
+//        }
     }
 
 }
