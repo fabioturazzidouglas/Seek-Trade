@@ -30,7 +30,7 @@ public class DeleteProfile extends AppCompatActivity {
         deleteProfileBtn = findViewById(R.id.confirmDeleteBtn);
         discardBtn = findViewById(R.id.discardBtn);
 
-        String uEmail = fAuth.getCurrentUser().getEmail();
+        String uEmail = fAuth.getCurrentUser().getEmail().trim();
 
         String deleteMsg = "Do you want to delete " + uEmail + " profile?";
         message.setText(deleteMsg);
@@ -38,8 +38,9 @@ public class DeleteProfile extends AppCompatActivity {
         deleteProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
                 dbHelper.deleteUserWithEmail(uEmail);
+                fAuth.getCurrentUser().delete();
+                FirebaseAuth.getInstance().signOut();
                 Toast.makeText(DeleteProfile.this, "Profile successfully deleted", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), Login.class));
             }

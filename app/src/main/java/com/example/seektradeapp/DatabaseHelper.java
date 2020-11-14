@@ -422,20 +422,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void deleteUserWithEmail(String email) {
-        String DELETE_USER_QUERY =
-                String.format("DELETE FROM users WHERE email = '%s'",
-                        TABLE_USERS, KEY_USER_EMAIL, email);
 
         SQLiteDatabase db = this.getWritableDatabase();
-        db.rawQuery(DELETE_USER_QUERY, null);
-//        try {
-//            db.delete(TABLE_POSTS, null, null);
-//            db.delete(TABLE_USERS, null, null);
-//        } catch (Exception e) {
-//            Log.d(TAG, "Error while trying to delete all posts and users");
-//        } finally {
-//            db.close();
-//        }
+        db.delete(TABLE_USERS, "email= ?", new String[]{String.valueOf(email)});
+        db.close();
+
     }
 
 }
