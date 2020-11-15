@@ -182,29 +182,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // The database connection is cached so it's not expensive to call getWriteableDatabase() multiple times.
         SQLiteDatabase db = getWritableDatabase();
 
-        db.beginTransaction();
-        try {
-            ContentValues newValues = new ContentValues();
-            newValues.put(KEY_POST_USER_EMAIL_FK, post.getUserEmail());
-            newValues.put(KEY_POST_CATEGORY, post.getCategory());
-            newValues.put(KEY_POST_TITLE, post.getTitle());
-            newValues.put(KEY_POST_DESCRIPTION, post.getDescription());
-            newValues.put(KEY_POST_PRICE, post.getPrice());
-            newValues.put(KEY_POST_POSTDATE, post.getPostDate());
-            newValues.put(KEY_POST_ADDRESS, post.getAddress());
-            newValues.put(KEY_POST_ZIPCODE, post.getZipCode());
-            newValues.put(KEY_POST_PHOTO, post.getPhoto());
+        ContentValues newValues = new ContentValues();
+        newValues.put(KEY_POST_USER_EMAIL_FK, post.getUserEmail());
+        newValues.put(KEY_POST_CATEGORY, post.getCategory());
+        newValues.put(KEY_POST_TITLE, post.getTitle());
+        newValues.put(KEY_POST_DESCRIPTION, post.getDescription());
+        newValues.put(KEY_POST_PRICE, post.getPrice());
+        newValues.put(KEY_POST_POSTDATE, post.getPostDate());
+        newValues.put(KEY_POST_ADDRESS, post.getAddress());
+        newValues.put(KEY_POST_ZIPCODE, post.getZipCode());
+        newValues.put(KEY_POST_PHOTO, post.getPhoto());
 
-//            db.update(TABLE_POSTS, newValues, KEY_POST_ID + "= ?", new String[]{String.valueOf(post.getPostId())});
-            db.update(TABLE_POSTS, newValues, KEY_POST_ID + "=" + post.getPostId(), null);
+        db.update(TABLE_POSTS, newValues, " postId = ?", new String[]{post.getPostId() + ""});
 
-        } catch (Exception e) {
-            Log.d(TAG, "Error while trying to update post");
-        } finally {
-            db.endTransaction();
-        }
         return post.getPostId();
-    }
+}
 
 
     public long addOrUpdateUser(User user) {
@@ -215,6 +207,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.beginTransaction();
         try {
             ContentValues values = new ContentValues();
+            values.put(KEY_USER_ID, user.getUserId());
             values.put(KEY_USER_FULLNAME, user.getFullName());
             values.put(KEY_USER_REGISTRATIONDATE, user.getRegistrationDate());
             values.put(KEY_USER_EMAIL, user.getEmail());
