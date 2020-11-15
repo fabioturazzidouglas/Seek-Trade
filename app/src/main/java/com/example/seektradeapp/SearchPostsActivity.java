@@ -16,8 +16,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import java.util.List;
 
 public class SearchPostsActivity extends AppCompatActivity {
@@ -58,6 +56,7 @@ public class SearchPostsActivity extends AppCompatActivity {
         ImageView addIcon = findViewById(R.id.imageViewAddPost);
         EditText searchedTitle = findViewById(R.id.editTextSearch);
         Spinner spinnerCategory = findViewById(R.id.spinnerCategories);
+        ImageView toMyPosts = findViewById(R.id.imageViewToMyPosts);
         //create adapter, pass data
         PostAdapter myPostAdapter = new PostAdapter(allActivePosts);
         //attach adapter to recyclerview
@@ -119,6 +118,16 @@ public class SearchPostsActivity extends AppCompatActivity {
                 myBundle.putInt("PostId", clickedPost.getPostId());
                 goToPost.putExtras(myBundle);
                 startActivity(goToPost);
+            }
+        });
+        //view all my posts
+
+        toMyPosts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SearchPostsActivity.this, "This leads to my post", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), ViewMyPosts.class));
+
             }
         });
 

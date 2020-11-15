@@ -341,7 +341,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Post> posts = new ArrayList<>();
 
         String POSTS_SELECT_QUERY =
-                String.format("SELECT * FROM %s WHERE %s = %s;",
+                String.format("SELECT * FROM %s WHERE %s = '%s';",
                         TABLE_POSTS,
                         KEY_POST_USER_EMAIL_FK, userEmail);
 
@@ -384,7 +384,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // LEFT OUTER JOIN USERS
         // ON POSTS.KEY_POST_USER_ID_FK = USERS.KEY_USER_ID
         String POSTS_SELECT_QUERY =
-                String.format("SELECT * FROM %s WHERE %s = %s",
+                String.format("SELECT * FROM %s WHERE %s = '%s'",
                         TABLE_USERS,
                         KEY_USER_EMAIL, userEmail);
 

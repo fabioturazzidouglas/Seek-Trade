@@ -44,6 +44,7 @@ public class PostPreview extends AppCompatActivity {
         ImageView imageViewPreviewPic = findViewById(R.id.imageViewPreview);
         Button backtoEdit = findViewById(R.id.buttonBackToEdit);
         Button publish = findViewById(R.id.buttonPublishPost);
+
         fAuth = FirebaseAuth.getInstance();
         Date d = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat(("yyyy-MM-dd"), Locale.getDefault());

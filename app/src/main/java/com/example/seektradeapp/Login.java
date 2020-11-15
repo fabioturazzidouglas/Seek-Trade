@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-//        populateDatabase();
+        populateDatabase();
 
         mEmail = findViewById(R.id.textEmailLogIn);
         mPass = findViewById(R.id.textPasswordLogIn);

@@ -12,8 +12,8 @@ public class MyPostAdapter extends BaseAdapter {
 
     List<Post> listAllMyPosts;
 
-    public MyPostAdapter(List<Post> allMyPost) {
-        this.listAllMyPosts = allMyPost;
+    public MyPostAdapter(List<Post> allMyPosts) {
+        listAllMyPosts = allMyPosts;
     }
 
     @Override
@@ -35,11 +35,11 @@ public class MyPostAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null){
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            convertView = layoutInflater.inflate(R.layout.gridview_item,parent,false);
+            convertView = layoutInflater.inflate(R.layout.allmyposts,parent,false);
         }
-
+//textViewMyTitle
         TextView txtViewPostTitle = convertView.findViewById(R.id.textViewMyTitle);
-        String displayText = listAllMyPosts.get(position).getTitle() + "\n$" + listAllMyPosts.get(position).getPrice();
+        String displayText = "\n"+listAllMyPosts.get(position).getTitle() + "\n$" + listAllMyPosts.get(position).getPrice() + "\n" +listAllMyPosts.get(position).getPostDate();
         txtViewPostTitle.setText(displayText);
 
 //        ImageView imgViewPhoto = view.findViewById(R.id.imgView_pic1);
