@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -58,6 +59,8 @@ public class PostAdapter extends BaseAdapter {
         TextView txtViewPrice = view.findViewById(R.id.textView_price);
         txtViewPrice.setText("$" + postList.get(i).getPrice());
         ImageView imgViewPostPhoto = view.findViewById(R.id.imgView_photo);
+        Glide.with(context).clear(imgViewPostPhoto);
+
         StorageReference ref = storageReference.child(postList.get(i).getPhoto());
 
         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -65,6 +68,8 @@ public class PostAdapter extends BaseAdapter {
             public void onSuccess(Uri uri) {
                 Glide.with(context)
                         .load(ref)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
                         .into(imgViewPostPhoto);
             }
         }).addOnFailureListener(new OnFailureListener() {

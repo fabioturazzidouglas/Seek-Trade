@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -116,6 +117,8 @@ public class ModifyMyPost extends AppCompatActivity {
             postDesc.setText(thisPost.getDescription());
             postAdd.setText(thisPost.getAddress());
             postZip.setText(thisPost.getZipCode());
+
+            Glide.with(ModifyMyPost.this).clear(previewPhoto);
 
             StorageReference ref = storageReference.child(thisPost.getPhoto());
 

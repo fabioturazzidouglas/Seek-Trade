@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,12 +59,15 @@ public class PostDetails extends AppCompatActivity {
             textViewCategory.setText(thisPost.getCategory());
             StorageReference ref = storageReference.child(thisPost.getPhoto());
 
+            Glide.with(PostDetails.this).clear(imageViewPhoto);
+
             ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
 
                     Glide.with(PostDetails.this)
                             .load(ref)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into(imageViewPhoto);
                 }
             }).addOnFailureListener(new OnFailureListener() {

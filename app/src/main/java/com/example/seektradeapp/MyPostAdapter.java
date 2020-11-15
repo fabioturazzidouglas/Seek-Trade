@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -60,12 +61,16 @@ public class MyPostAdapter extends BaseAdapter {
         //Set photo from firebase
         ImageView postPhoto = convertView.findViewById(R.id.imageViewMyPost);
         StorageReference ref = storageReference.child(listAllMyPosts.get(position).getPhoto());
+        Glide.with(context).clear(postPhoto);
+
 
         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Glide.with(context)
                         .load(ref)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
                         .into(postPhoto);
             }
         }).addOnFailureListener(new OnFailureListener() {
