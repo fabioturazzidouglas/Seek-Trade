@@ -21,9 +21,11 @@
     <string name="editTextSetPrice">Price (numeric value only)</string>
     <string name="publishBtn">Publish Post</string>
     <string name="back2Edit">Back to edit</string>
-    <string name="addressHint">Please type the city</string>
+    <string name="addressHint">Please type an address</string>
     <string name="txtViewAddress">Type Address</string>
     <string name="textZip">Enter Zip Code</string>
+    <string name="UploadPhoto">Upload Photo</string>
+    <string name="PreviewPhoto">Select Photo</string>
     <string-array name="PostsCategories">
         <item>All Categories</item>
         <item>Real Estate</item>
