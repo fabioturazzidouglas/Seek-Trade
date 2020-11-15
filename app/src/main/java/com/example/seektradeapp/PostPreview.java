@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
@@ -43,7 +45,6 @@ public class PostPreview extends AppCompatActivity {
     DatabaseHelper dbHelper;
     FirebaseStorage storage;
     StorageReference storageReference;
-    Uri downUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class PostPreview extends AppCompatActivity {
         ImageView imageViewPreviewPic = findViewById(R.id.imageViewPreview);
         Button backtoEdit = findViewById(R.id.buttonBackToEdit);
         Button publish = findViewById(R.id.buttonPublishPost);
+
         fAuth = FirebaseAuth.getInstance();
         Date d = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat(("yyyy-MM-dd"), Locale.getDefault());
@@ -89,10 +91,18 @@ public class PostPreview extends AppCompatActivity {
 
             StorageReference ref = storageReference.child(photo);
 
-            Log.e("PostPreview", photo);
-            Glide.with(PostPreview.this)
-                    .load(ref)
-                    .into(imageViewPreviewPic);
+            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(PostPreview.this)
+                            .load(ref)
+                            .into(imageViewPreviewPic);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                }
+            });
 
             //back to edit
             backtoEdit.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +117,7 @@ public class PostPreview extends AppCompatActivity {
                     returnIntent.putExtras(returnBundle);
                     setResult(Activity.RESULT_OK, returnIntent);
                     finish();
-                    //startActivity(new Intent(PostPreview.this,CreatePostActivity.class));
+//                    startActivity(new Intent(PostPreview.this,CreatePostActivity.class));
                 }
             });
             //publish post

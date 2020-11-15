@@ -87,7 +87,7 @@ public class Register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
                             Date today = new Date();
-                            User newUser = new User(fAuth.getCurrentUser().getUid(), newUserFullName.getText().toString(), today.toString(), nEmail, password);
+                            User newUser = new User(fAuth.getCurrentUser().getUid(), newUserFullName.getText().toString(), today.toString(), nEmail);
                             dbHelper.addOrUpdateUser(newUser);
 
                             Toast.makeText(Register.this, "User Created", Toast.LENGTH_SHORT).show();

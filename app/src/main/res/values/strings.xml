@@ -26,6 +26,10 @@
     <string name="textZip">Enter Zip Code</string>
     <string name="UploadPhoto">Upload Photo</string>
     <string name="PreviewPhoto">Select Photo</string>
+    <string name="btnBack">BACK</string>
+    <string name="txtviewModifypost">MODIFY POST</string>
+    <string name="btnsubmitmodify">SUBMIT CHANGE</string>
+    <string name="btnDeletePost">DELETE POST</string>
     <string-array name="PostsCategories">
         <item>All Categories</item>
         <item>Real Estate</item>

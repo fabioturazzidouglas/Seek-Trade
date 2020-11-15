@@ -33,7 +33,7 @@
         android:id="@+id/editTextPostTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/editTitleHint"
         android:inputType="textPersonName"
@@ -60,7 +60,7 @@
         android:id="@+id/textViewSeclectCat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:paddingLeft="10dp"
         android:text="@string/txtViewSelectCat"
         android:textSize="18sp"
@@ -79,9 +79,10 @@
 
     <Button
         android:id="@+id/buttonPreviewPost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="111dp"
+        android:layout_height="27dp"
         android:layout_marginTop="16dp"
+        android:paddingBottom="30dp"
         android:text="@string/buttonPreviewPost"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -166,7 +167,7 @@
         android:id="@+id/textViewAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:paddingLeft="10dp"
         android:text="@string/txtViewAddress"
         android:textSize="18sp"
@@ -175,10 +176,12 @@
 
     <ImageView
         android:id="@+id/imageViewPreviewPhoto"
-        android:layout_width="201dp"
-        android:layout_height="108dp"
+        android:layout_width="152dp"
+        android:layout_height="84dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextZip"
-        app:srcCompat="@drawable/no_images_added"
-        tools:layout_editor_absoluteX="16dp" />
+        app:srcCompat="@drawable/no_images_added" />
 </androidx.constraintlayout.widget.ConstraintLayout>

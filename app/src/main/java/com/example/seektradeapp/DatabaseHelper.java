@@ -39,7 +39,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_USER_FULLNAME = "fullName";
     private static final String KEY_USER_REGISTRATIONDATE = "registrationDate";
     private static final String KEY_USER_EMAIL = "email";
-    private static final String KEY_USER_PASSWORD = "password";
     private static final String TAG = "Database_Helper";
 
 //    private static final String KEY_PHOTO_ID = "photoId";
@@ -61,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_POSTS_TABLE = "CREATE TABLE " + TABLE_POSTS +
                 "(" +
-                KEY_POST_ID + " INTEGER PRIMARY KEY," + // Define a primary key
+                KEY_POST_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + // Define a primary key
                 KEY_POST_USER_EMAIL_FK + " STRING REFERENCES " + TABLE_USERS + "(" + KEY_USER_EMAIL + ")," + // Define a foreign key
                 KEY_POST_CATEGORY + " VARCHAR(30)," +
                 KEY_POST_TITLE + " VARCHAR(30)," +
@@ -79,8 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 KEY_USER_ID + " VARCHAR(50)," +
                 KEY_USER_FULLNAME + " VARCHAR(30)," +
                 KEY_USER_REGISTRATIONDATE + " DATE," +
-                KEY_USER_EMAIL + " VARCHAR(30) PRIMARY KEY," +
-                KEY_USER_PASSWORD + " VARCHAR(30)" +
+                KEY_USER_EMAIL + " VARCHAR(30) PRIMARY KEY" +
                 ")";
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_POSTS);
@@ -186,21 +184,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.beginTransaction();
         try {
-            ContentValues values = new ContentValues();
-            values.put(KEY_POST_USER_EMAIL_FK, post.getUserEmail());
-            values.put(KEY_POST_CATEGORY, post.getCategory());
-            values.put(KEY_POST_TITLE, post.getTitle());
-            values.put(KEY_POST_DESCRIPTION, post.getDescription());
-            values.put(KEY_POST_PRICE, post.getPrice());
-            values.put(KEY_POST_POSTDATE, post.getPostDate());
-            values.put(KEY_POST_ADDRESS, post.getAddress());
-            values.put(KEY_POST_ZIPCODE, post.getZipCode());
-            values.put(KEY_POST_PHOTO, post.getPhoto());
+            ContentValues newValues = new ContentValues();
+            newValues.put(KEY_POST_USER_EMAIL_FK, post.getUserEmail());
+            newValues.put(KEY_POST_CATEGORY, post.getCategory());
+            newValues.put(KEY_POST_TITLE, post.getTitle());
+            newValues.put(KEY_POST_DESCRIPTION, post.getDescription());
+            newValues.put(KEY_POST_PRICE, post.getPrice());
+            newValues.put(KEY_POST_POSTDATE, post.getPostDate());
+            newValues.put(KEY_POST_ADDRESS, post.getAddress());
+            newValues.put(KEY_POST_ZIPCODE, post.getZipCode());
+            newValues.put(KEY_POST_PHOTO, post.getPhoto());
 
-            // First try to update the user in case the user already exists in the database
-            // This assumes userNames are unique
-            db.update(TABLE_POSTS, values, KEY_POST_ID + "= ?", new String[]{String.valueOf(post.getPostId())});
-
+//            db.update(TABLE_POSTS, newValues, KEY_POST_ID + "= ?", new String[]{String.valueOf(post.getPostId())});
+            db.update(TABLE_POSTS, newValues, KEY_POST_ID + "=" + post.getPostId(), null);
 
         } catch (Exception e) {
             Log.d(TAG, "Error while trying to update post");
@@ -222,7 +218,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(KEY_USER_FULLNAME, user.getFullName());
             values.put(KEY_USER_REGISTRATIONDATE, user.getRegistrationDate());
             values.put(KEY_USER_EMAIL, user.getEmail());
-            values.put(KEY_USER_PASSWORD, user.getPassword());
 
             // First try to update the user in case the user already exists in the database
             // This assumes userEmail are unique
@@ -341,7 +336,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Post> posts = new ArrayList<>();
 
         String POSTS_SELECT_QUERY =
-                String.format("SELECT * FROM %s WHERE %s = %s;",
+                String.format("SELECT * FROM %s WHERE %s = '%s';",
                         TABLE_POSTS,
                         KEY_POST_USER_EMAIL_FK, userEmail);
 
@@ -384,7 +379,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // LEFT OUTER JOIN USERS
         // ON POSTS.KEY_POST_USER_ID_FK = USERS.KEY_USER_ID
         String POSTS_SELECT_QUERY =
-                String.format("SELECT * FROM %s WHERE %s = %s",
+                String.format("SELECT * FROM %s WHERE %s = '%s'",
                         TABLE_USERS,
                         KEY_USER_EMAIL, userEmail);
 
@@ -398,7 +393,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 user.setFullName(cursor.getString(cursor.getColumnIndex(KEY_USER_FULLNAME)));
                 user.setRegistrationDate(cursor.getString(cursor.getColumnIndex(KEY_USER_REGISTRATIONDATE)));
                 user.setEmail(cursor.getString(cursor.getColumnIndex(KEY_USER_EMAIL)));
-                user.setPassword(cursor.getString(cursor.getColumnIndex(KEY_USER_PASSWORD)));
             }
         } catch (Exception e) {
             Log.d(TAG, "Error while trying to get users from database");
@@ -432,7 +426,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     newUser.setFullName(cursor.getString(cursor.getColumnIndex(KEY_USER_FULLNAME)));
                     newUser.setRegistrationDate(cursor.getString(cursor.getColumnIndex(KEY_USER_REGISTRATIONDATE)));
                     newUser.setEmail(cursor.getString(cursor.getColumnIndex(KEY_USER_EMAIL)));
-                    newUser.setPassword(cursor.getString(cursor.getColumnIndex(KEY_USER_PASSWORD)));
 
                     users.add(newUser);
                 } while (cursor.moveToNext());

@@ -10,13 +10,14 @@
         android:layout_height="80dp"
         android:layout_weight="0.5"
         android:paddingLeft="10dp"
-        app:srcCompat="@drawable/no_img" />
+        app:srcCompat="@drawable/no_images_added" />
 
     <TextView
         android:id="@+id/textViewMyTitle"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_weight="1"
+        android:gravity="center_vertical"
         android:text="TextView" />
 
     <ImageView

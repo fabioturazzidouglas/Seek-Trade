@@ -80,10 +80,10 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewAddPost"
-        app:layout_constraintVertical_bias="0.833" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageViewAddPost"
@@ -106,5 +106,20 @@
         app:layout_constraintTop_toBottomOf="@+id/listViewPosts"
         app:layout_constraintVertical_bias="0.926"
         tools:ignore="MissingConstraints,OnClick" />
+
+    <ImageView
+        android:id="@+id/imageViewToMyPosts"
+        android:layout_width="53dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewAddPost"
+        app:layout_constraintHorizontal_bias="0.432"
+        app:layout_constraintStart_toStartOf="@+id/toolbar2"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/pro5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
