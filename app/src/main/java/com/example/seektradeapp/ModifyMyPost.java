@@ -155,8 +155,6 @@ public class ModifyMyPost extends AppCompatActivity {
 
                     Post updatedPost = dbHelper.getPostById(thisPost.getPostId());
 
-                    Toast.makeText(ModifyMyPost.this, updatedPost.getDescription() , Toast.LENGTH_LONG).show();
-                    Toast.makeText(ModifyMyPost.this, thisPost.getDescription() , Toast.LENGTH_SHORT).show();
                     Intent goToPost = new Intent(ModifyMyPost.this, PostDetails.class);
                     //create Bundle
                     Bundle myBundle = new Bundle();
@@ -170,7 +168,9 @@ public class ModifyMyPost extends AppCompatActivity {
             deletePost.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    String id = String.valueOf(postId);
+                    dbHelper.deletePost(id);
+                    startActivity(new Intent(getApplicationContext(), ViewMyPosts.class));
                 }
             });
         }

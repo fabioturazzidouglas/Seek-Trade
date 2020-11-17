@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="@string/postTitle"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -52,7 +52,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPreviewPostTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPreviewPostDate2" />
 
     <TextView
         android:id="@+id/textViewPreviewCategory"
@@ -80,10 +80,12 @@
         android:id="@+id/textViewPreviewUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/postUser"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPreviewPrice"
-        tools:layout_editor_absoluteX="14dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPreviewPrice" />
 
     <TextView
         android:id="@+id/textViewPreviewLocation"
@@ -91,9 +93,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:text="@string/postLocation"
         android:textColor="@color/teal_700"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewPreviewUser"
         app:layout_constraintTop_toBottomOf="@+id/textViewPreviewPrice" />
 
@@ -101,21 +104,22 @@
         android:id="@+id/textViewPreviewPostDate2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/postDate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toEndOf="@+id/textViewPostTitle"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewPreview" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPreviewPostTitle" />
 
     <Button
         android:id="@+id/buttonPublishPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
         android:text="@string/publishBtn"
+        app:backgroundTint="#4CAF50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPreviewDetails" />
 
@@ -123,8 +127,11 @@
         android:id="@+id/buttonBackToEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="68dp"
         android:text="@string/back2Edit"
+        app:backgroundTint="#FF9800"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPreviewDetails" />
 

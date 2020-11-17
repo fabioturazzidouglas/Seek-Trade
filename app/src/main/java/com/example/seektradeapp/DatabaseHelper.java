@@ -197,6 +197,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return post.getPostId();
 }
+    public void deletePost(String postid){
+        // The database connection is cached so it's not expensive to call getWriteableDatabase() multiple times.
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try {
+            // Order of deletions is important when foreign key relationships exist.
+            db.delete(TABLE_POSTS, "postId = ?", new String[]{postid});
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to delete post " + postid);
+        } finally {
+            db.endTransaction();
+        }
+    }
 
 
     public long addOrUpdateUser(User user) {
