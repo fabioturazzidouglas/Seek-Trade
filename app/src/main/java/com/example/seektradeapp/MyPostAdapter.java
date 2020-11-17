@@ -61,7 +61,7 @@ public class MyPostAdapter extends BaseAdapter {
 
         if(listAllMyPosts.size()!=0) {
 
-            String displayText = "\n" + listAllMyPosts.get(position).getTitle() + "\n$" + listAllMyPosts.get(position).getPrice() + "\n" + listAllMyPosts.get(position).getPostDate();
+            String displayText = listAllMyPosts.get(position).getTitle() + "\n$" + listAllMyPosts.get(position).getPrice() + "\n" + listAllMyPosts.get(position).getPostDate();
             txtViewPostTitle.setText(displayText);
 
             //Set photo from firebase

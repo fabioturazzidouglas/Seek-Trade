@@ -7,6 +7,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class ViewMyPosts extends AppCompatActivity {
 
         TextView txtViewFullName = findViewById(R.id.textViewUserName);
         ListView listViewAllMyPosts = findViewById(R.id.listViewListMyPosts);;
+        Button backToSearch = findViewById(R.id.btnBackToSearch);
         FirebaseAuth fAuth = FirebaseAuth.getInstance();;
         //get user id/email
         String userEmail = fAuth.getCurrentUser().getEmail();
@@ -55,6 +57,15 @@ public class ViewMyPosts extends AppCompatActivity {
             TextView nopost = findViewById(R.id.textViewNoPost);
             nopost.setVisibility(View.VISIBLE);
         }
+
+        //back to all
+        backToSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ViewMyPosts.this, SearchPostsActivity.class));
+            }
+        });
+
         //choose a post to edit/delete
         listViewAllMyPosts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
