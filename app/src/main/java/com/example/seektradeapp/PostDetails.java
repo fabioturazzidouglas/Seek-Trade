@@ -44,6 +44,16 @@ public class PostDetails extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
+
+        imageViewReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToMain= new Intent(PostDetails.this, SearchPostsActivity.class);
+                startActivity(goToMain);
+
+            }
+        });
+
         try {
             int postId = getIntent().getExtras().getInt("PostId");
             Post thisPost = dbHelper.getPostById(postId);
@@ -81,13 +91,5 @@ public class PostDetails extends AppCompatActivity {
             Log.e("Post Details","Post not found " + ex.getMessage());
         }
 
-        imageViewReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goToMain= new Intent(PostDetails.this, SearchPostsActivity.class);
-                startActivity(goToMain);
-
-            }
-        });
     }
 }

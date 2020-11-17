@@ -121,6 +121,7 @@ public class ModifyMyPost extends AppCompatActivity {
             Glide.with(ModifyMyPost.this).clear(previewPhoto);
 
             StorageReference ref = storageReference.child(thisPost.getPhoto());
+            imgPath = thisPost.getPhoto();
 
             ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
@@ -216,6 +217,7 @@ public class ModifyMyPost extends AppCompatActivity {
             String pathComponent = sdf.format(cal.getTime()).toString();
 
             String imgPathFirebase = "images/" + pathComponent;
+
             this.imgPath = imgPathFirebase;
             StorageReference ref = storageReference.child(imgPathFirebase);
 

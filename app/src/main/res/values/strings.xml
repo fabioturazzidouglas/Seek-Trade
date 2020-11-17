@@ -33,6 +33,10 @@
     <string name="txtviewCat">Category</string>
     <string name="txtviewNoPost">Have something to sell? Click the ADD button in the tool bar!</string>
     <string name="txtNopost">You have not posted anything yet. Start posting by using the ADD button below</string>
+    <string name="addPost">Add Post</string>
+    <string name="myPosts">My Posts</string>
+    <string name="searchPosts">Search Posts</string>
+    <string name="myProf">My Profile</string>
     <string-array name="PostsCategories">
         <item>All Categories</item>
         <item>Real Estate</item>

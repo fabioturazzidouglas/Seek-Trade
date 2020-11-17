@@ -47,7 +47,7 @@ public class CreatePostActivity extends AppCompatActivity {
     StorageReference storageReference;
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
-    static String imgPath;
+    static String imgPath = "images/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

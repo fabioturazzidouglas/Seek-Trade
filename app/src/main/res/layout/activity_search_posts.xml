@@ -4,17 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchPostsActivity"><![CDATA[
-
-    ="@+id/" />
-
-    =======
-
-
-
-
-
-    ]]>
+    tools:context=".SearchPostsActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -42,8 +32,8 @@
 
     <Spinner
         android:id="@+id/spinnerCategories"
-        android:layout_width="160dp"
-        android:layout_height="50dp"
+        android:layout_width="170dp"
+        android:layout_height="49dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -69,7 +59,9 @@
         android:paddingBottom="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" >
+
+    </ListView>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
@@ -87,10 +79,11 @@
 
     <ImageView
         android:id="@+id/imageViewAddPost"
-        android:layout_width="64dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar2"
+        app:layout_constraintEnd_toStartOf="@+id/logoutBtn"
         app:layout_constraintStart_toStartOf="@+id/toolbar2"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
@@ -98,28 +91,76 @@
         android:id="@+id/logoutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:onClick="logout"
         android:text="Log-out"
-        app:layout_constraintBottom_toTopOf="@+id/toolbar2"
+        app:backgroundTint="@android:color/holo_blue_light"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listViewPosts"
-        app:layout_constraintVertical_bias="0.926"
         tools:ignore="MissingConstraints,OnClick" />
 
     <ImageView
         android:id="@+id/imageViewToMyPosts"
-        android:layout_width="53dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="40dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageViewAddPost"
-        app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="@+id/toolbar2"
-        app:layout_constraintTop_toTopOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/pro5" />
+        app:srcCompat="@android:drawable/ic_menu_agenda" />
+
+    <TextView
+        android:id="@+id/textViewAddPost"
+        android:layout_width="50dp"
+        android:layout_height="12dp"
+        android:layout_marginBottom="2dp"
+        android:gravity="center_horizontal"
+        android:text="@string/addPost"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/logoutBtn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewMyProf"
+        android:layout_width="50dp"
+        android:layout_height="12dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="center_horizontal"
+        android:text="@string/myProf"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/logoutBtn"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAddPost" />
+
+    <TextView
+        android:id="@+id/textViewMyPosts"
+        android:layout_width="50dp"
+        android:layout_height="12dp"
+        android:layout_marginBottom="2dp"
+        android:gravity="center_horizontal"
+        android:text="@string/myPosts"
+        android:textColor="@color/white"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewAddPost"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/logoutBtn"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAddPost"
+        app:srcCompat="@drawable/profile_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
