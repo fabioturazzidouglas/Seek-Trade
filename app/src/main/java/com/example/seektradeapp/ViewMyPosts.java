@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class ViewMyPosts extends AppCompatActivity {
@@ -34,19 +36,25 @@ public class ViewMyPosts extends AppCompatActivity {
         //initialize user
         User currUser = dbHelper.getUserByEmail(userEmail);
 
-        //populate posts from db
-        List<Post> allMyPosts = dbHelper.getPostsByUserEmail(userEmail);
-
         //set full name
         String fullName = currUser.getFullName();
         txtViewFullName.setText(fullName);
-//        Toast.makeText(ViewMyPosts.this, currUser.getFullName(), Toast.LENGTH_SHORT).show();
 
-        //set adapter
-        MyPostAdapter myAdapter = new MyPostAdapter(allMyPosts, ViewMyPosts.this);
-        //attach adapter to listview
-        listViewAllMyPosts.setAdapter(myAdapter);
+        //populate posts from db
+        List<Post> allMyPosts = dbHelper.getPostsByUserEmail(userEmail);
+        //if user postes something
+        if (allMyPosts.size()!=0) {
+            //set adapter
+            MyPostAdapter myAdapter = new MyPostAdapter(allMyPosts, ViewMyPosts.this);
+            //attach adapter to listview
+            listViewAllMyPosts.setAdapter(myAdapter);
 
+        }
+        //if user has no post
+        else{
+            TextView nopost = findViewById(R.id.textViewNoPost);
+            nopost.setVisibility(View.VISIBLE);
+        }
         //choose a post to edit/delete
         listViewAllMyPosts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

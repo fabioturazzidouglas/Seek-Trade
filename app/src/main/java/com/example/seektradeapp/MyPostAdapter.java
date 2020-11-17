@@ -2,12 +2,14 @@ package com.example.seektradeapp;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -53,34 +55,41 @@ public class MyPostAdapter extends BaseAdapter {
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             convertView = layoutInflater.inflate(R.layout.allmyposts,parent,false);
         }
-//textViewMyTitle
+
         TextView txtViewPostTitle = convertView.findViewById(R.id.textViewMyTitle);
-        String displayText = "\n"+listAllMyPosts.get(position).getTitle() + "\n$" + listAllMyPosts.get(position).getPrice() + "\n" +listAllMyPosts.get(position).getPostDate();
-        txtViewPostTitle.setText(displayText);
-
-        //Set photo from firebase
         ImageView postPhoto = convertView.findViewById(R.id.imageViewMyPost);
-        StorageReference ref = storageReference.child(listAllMyPosts.get(position).getPhoto());
-        Glide.with(context).clear(postPhoto);
 
+        if(listAllMyPosts.size()!=0) {
 
-        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(context)
-                        .load(ref)
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
-                        .into(postPhoto);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-            }
-        });
+            String displayText = "\n" + listAllMyPosts.get(position).getTitle() + "\n$" + listAllMyPosts.get(position).getPrice() + "\n" + listAllMyPosts.get(position).getPostDate();
+            txtViewPostTitle.setText(displayText);
 
-//        ImageView imgViewPhoto = view.findViewById(R.id.imgView_pic1);
-//        imgViewPhoto.setImageResource(postList.get(i).getPhotos());
+            //Set photo from firebase
+
+            StorageReference ref = storageReference.child(listAllMyPosts.get(position).getPhoto());
+            Glide.with(context).clear(postPhoto);
+
+            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(context)
+                            .load(ref)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(postPhoto);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                }
+            });
+        }
+        else{
+            Log.e("POST ADAPTER", "THE ADAPTER WORKS");
+            txtViewPostTitle.setText("You have no post to display.");
+
+        }
+
         return convertView;
     }
 }
