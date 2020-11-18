@@ -8,8 +8,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -39,11 +41,11 @@ public class PostDetails extends AppCompatActivity {
         TextView textViewCategory = findViewById(R.id.textViewCategory);
         ImageView imageViewReturn = findViewById(R.id.imageViewReturn);
         ImageView imageViewPhoto = findViewById(R.id.imageViewPost);
+        Button btnContactSeller = findViewById(R.id.btnContactUser);
         fAuth = FirebaseAuth.getInstance();
         //Get instances for FirebaseStorage
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
-
 
         imageViewReturn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,10 +88,33 @@ public class PostDetails extends AppCompatActivity {
                 }
             });
 
-
         } catch(Exception ex) {
             Log.e("Post Details","Post not found " + ex.getMessage());
         }
+        btnContactSeller.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setData(Uri.parse("mailto:"));
+                emailIntent.setType("text/plain");
+
+                int postId = getIntent().getExtras().getInt("PostId");
+                Post thisPost = dbHelper.getPostById(postId);
+
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Seek & Trade: " + thisPost.getTitle());
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{thisPost.getUserEmail()});
+                try {
+                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                    finish();
+                    Log.i("Finished sending email", "");
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(PostDetails.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+                }
+            }
+            });
+
+
+
 
     }
 }
