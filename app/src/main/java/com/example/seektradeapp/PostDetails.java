@@ -47,6 +47,47 @@ public class PostDetails extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
+        //Navbar objects and onclicklisteners:
+        ImageView addIcon = findViewById(R.id.imageViewAddPost);
+        ImageView toMyPosts = findViewById(R.id.imageViewToMyPosts);
+        Button logOut = findViewById(R.id.logoutBtn);
+        ImageView toSearch = findViewById(R.id.imageViewSearchPosts);
+
+        //Event to go to search
+        toSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PostDetails.this, SearchPostsActivity.class));
+            }
+        });
+
+
+        //event for logout button
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(PostDetails.this, Login.class));
+                finish();
+            }
+        });
+
+        //add a new post
+        addIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PostDetails.this, CreatePostActivity.class));
+            }
+        });
+
+        toMyPosts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ViewMyPosts.class));
+
+            }
+        });
+
         imageViewReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
