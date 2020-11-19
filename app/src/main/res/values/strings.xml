@@ -37,6 +37,7 @@
     <string name="myPosts">My Posts</string>
     <string name="searchPosts">Search Posts</string>
     <string name="myProf">My Profile</string>
+    <string name="btnReturn">BACK</string>
     <string-array name="PostsCategories">
         <item>All Categories</item>
         <item>Real Estate</item>

@@ -39,7 +39,7 @@ public class ViewMyPosts extends AppCompatActivity {
         User currUser = dbHelper.getUserByEmail(userEmail);
 
         //set full name
-        String fullName = currUser.getFullName();
+        String fullName = "All " + currUser.getFullName() +"'s posts";
         txtViewFullName.setText(fullName);
 
         //populate posts from db

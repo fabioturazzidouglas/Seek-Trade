@@ -13,7 +13,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/btnBack"
         app:backgroundTint="@android:color/holo_blue_light"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar5"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,17 +44,19 @@
 
     <ListView
         android:id="@+id/listViewListMyPosts"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="411dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUserName" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNoPost" />
 
     <TextView
         android:id="@+id/textViewNoPost"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -62,6 +64,7 @@
         android:textSize="20sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listViewListMyPosts" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

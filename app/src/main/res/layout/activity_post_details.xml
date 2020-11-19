@@ -19,16 +19,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageViewReturn"
-        android:layout_width="54dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="@string/returnToPosts"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/abc_vector_test" />
-
-    <ImageView
         android:id="@+id/imageViewPost"
         android:layout_width="0dp"
         android:layout_height="200dp"
@@ -118,5 +108,14 @@
         android:text="@string/txtviewCat"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLocation" />
+
+    <Button
+        android:id="@+id/buttonReturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnReturn"
+        app:backgroundTint="@android:color/holo_blue_light"
+        app:layout_constraintStart_toStartOf="@+id/toolbarPostDetails"
+        app:layout_constraintTop_toTopOf="@+id/toolbarPostDetails" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

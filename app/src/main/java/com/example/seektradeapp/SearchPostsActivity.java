@@ -124,7 +124,6 @@ public class SearchPostsActivity extends AppCompatActivity {
         toMyPosts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(SearchPostsActivity.this, "This leads to my post", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), ViewMyPosts.class));
 
             }

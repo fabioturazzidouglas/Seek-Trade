@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,15 +38,15 @@ public class PostDetails extends AppCompatActivity {
         TextView textViewUser = findViewById(R.id.textViewUser);
         TextView textViewPostDate = findViewById(R.id.textViewPostDate);
         TextView textViewCategory = findViewById(R.id.textViewCategory);
-        ImageView imageViewReturn = findViewById(R.id.imageViewReturn);
         ImageView imageViewPhoto = findViewById(R.id.imageViewPost);
+        Button returnBtn = findViewById(R.id.buttonReturn);
         fAuth = FirebaseAuth.getInstance();
         //Get instances for FirebaseStorage
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
 
-        imageViewReturn.setOnClickListener(new View.OnClickListener() {
+        returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToMain= new Intent(PostDetails.this, SearchPostsActivity.class);
