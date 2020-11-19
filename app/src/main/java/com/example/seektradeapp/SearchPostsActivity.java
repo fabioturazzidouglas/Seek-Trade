@@ -10,11 +10,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -56,10 +59,29 @@ public class SearchPostsActivity extends AppCompatActivity {
         EditText searchedTitle = findViewById(R.id.editTextSearch);
         Spinner spinnerCategory = findViewById(R.id.spinnerCategories);
         ImageView toMyPosts = findViewById(R.id.imageViewToMyPosts);
+        Button logOut = findViewById(R.id.logoutBtn);
+        ImageView toSearch = findViewById(R.id.imageViewSearchPosts);
         //create adapter, pass data
         PostAdapter myPostAdapter = new PostAdapter(allActivePosts, SearchPostsActivity.this);
         //attach adapter to recyclerview
         listViewPosts.setAdapter(myPostAdapter);
+
+        //event for logout button
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(SearchPostsActivity.this, Login.class));
+                finish();
+            }
+        });
+
+        toSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SearchPostsActivity.this, SearchPostsActivity.class));
+            }
+        });
 
         //search for post
         searchIcon.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +100,7 @@ public class SearchPostsActivity extends AppCompatActivity {
                     firstFilter = false;
                     secondFilter = false;
                     //Log.e(TAG, "Error fetching post");
-                    if (searchedText.equals("") || eachPost.getTitle().contains(searchedText)) {
+                    if (searchedText.equals("") || eachPost.getTitle().toLowerCase().contains(searchedText.toLowerCase())) {
                         firstFilter = true;
                     }
                     if (searchedCategory.equals("All Categories") || eachPost.getCategory().equals(searchedCategory)) {
@@ -125,7 +147,6 @@ public class SearchPostsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ViewMyPosts.class));
-
             }
         });
 

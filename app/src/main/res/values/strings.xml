@@ -37,7 +37,12 @@
     <string name="myPosts">My Posts</string>
     <string name="searchPosts">Search Posts</string>
     <string name="myProf">My Profile</string>
+<<<<<<< HEAD
     <string name="btnReturn">BACK</string>
+=======
+    <string name="contactUser">Contact this Seller</string>
+    <string name="toSearch">Find Posts</string>
+>>>>>>> sendEmail_FEATURE
     <string-array name="PostsCategories">
         <item>All Categories</item>
         <item>Real Estate</item>

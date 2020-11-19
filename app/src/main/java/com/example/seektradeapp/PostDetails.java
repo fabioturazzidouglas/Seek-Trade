@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -39,12 +40,56 @@ public class PostDetails extends AppCompatActivity {
         TextView textViewPostDate = findViewById(R.id.textViewPostDate);
         TextView textViewCategory = findViewById(R.id.textViewCategory);
         ImageView imageViewPhoto = findViewById(R.id.imageViewPost);
+<<<<<<< HEAD
         Button returnBtn = findViewById(R.id.buttonReturn);
+=======
+        Button btnContactSeller = findViewById(R.id.btnContactUser);
+>>>>>>> sendEmail_FEATURE
         fAuth = FirebaseAuth.getInstance();
         //Get instances for FirebaseStorage
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
+        //Navbar objects and onclicklisteners:
+        ImageView addIcon = findViewById(R.id.imageViewAddPost);
+        ImageView toMyPosts = findViewById(R.id.imageViewToMyPosts);
+        Button logOut = findViewById(R.id.logoutBtn);
+        ImageView toSearch = findViewById(R.id.imageViewSearchPosts);
+
+        //Event to go to search
+        toSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PostDetails.this, SearchPostsActivity.class));
+            }
+        });
+
+
+        //event for logout button
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(PostDetails.this, Login.class));
+                finish();
+            }
+        });
+
+        //add a new post
+        addIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PostDetails.this, CreatePostActivity.class));
+            }
+        });
+
+        toMyPosts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ViewMyPosts.class));
+
+            }
+        });
 
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,10 +132,33 @@ public class PostDetails extends AppCompatActivity {
                 }
             });
 
-
         } catch(Exception ex) {
             Log.e("Post Details","Post not found " + ex.getMessage());
         }
+        btnContactSeller.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setData(Uri.parse("mailto:"));
+                emailIntent.setType("text/plain");
+
+                int postId = getIntent().getExtras().getInt("PostId");
+                Post thisPost = dbHelper.getPostById(postId);
+
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Seek & Trade: " + thisPost.getTitle());
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{thisPost.getUserEmail()});
+                try {
+                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                    finish();
+                    Log.i("Finished sending email", "");
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(PostDetails.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+                }
+            }
+            });
+
+
+
 
     }
 }
