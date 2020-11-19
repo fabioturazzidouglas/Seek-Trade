@@ -41,10 +41,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_USER_EMAIL = "email";
     private static final String TAG = "Database_Helper";
 
-//    private static final String KEY_PHOTO_ID = "photoId";
-//    private static final String KEY_PHOTO_IMG = "photoImg";
-//    private static final String KEY_PHOTO_POST_ID_FK = "postId";
-
 
     // Called when the database connection is being configured.
     // Configure database settings for things like foreign key support, write-ahead logging, etc.
@@ -181,19 +177,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public long updatePost(Post post) {
         // The database connection is cached so it's not expensive to call getWriteableDatabase() multiple times.
         SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            ContentValues newValues = new ContentValues();
+            newValues.put(KEY_POST_USER_EMAIL_FK, post.getUserEmail());
+            newValues.put(KEY_POST_CATEGORY, post.getCategory());
+            newValues.put(KEY_POST_TITLE, post.getTitle());
+            newValues.put(KEY_POST_DESCRIPTION, post.getDescription());
+            newValues.put(KEY_POST_PRICE, post.getPrice());
+            newValues.put(KEY_POST_POSTDATE, post.getPostDate());
+            newValues.put(KEY_POST_ADDRESS, post.getAddress());
+            newValues.put(KEY_POST_ZIPCODE, post.getZipCode());
+            newValues.put(KEY_POST_PHOTO, post.getPhoto());
 
-        ContentValues newValues = new ContentValues();
-        newValues.put(KEY_POST_USER_EMAIL_FK, post.getUserEmail());
-        newValues.put(KEY_POST_CATEGORY, post.getCategory());
-        newValues.put(KEY_POST_TITLE, post.getTitle());
-        newValues.put(KEY_POST_DESCRIPTION, post.getDescription());
-        newValues.put(KEY_POST_PRICE, post.getPrice());
-        newValues.put(KEY_POST_POSTDATE, post.getPostDate());
-        newValues.put(KEY_POST_ADDRESS, post.getAddress());
-        newValues.put(KEY_POST_ZIPCODE, post.getZipCode());
-        newValues.put(KEY_POST_PHOTO, post.getPhoto());
-
-        db.update(TABLE_POSTS, newValues, " postId = ?", new String[]{post.getPostId() + ""});
+            db.update(TABLE_POSTS, newValues, " postId = ?", new String[]{post.getPostId() + ""});
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.d("DBHelper", e.getMessage());
+        }
+        db.endTransaction();
 
         return post.getPostId();
 }

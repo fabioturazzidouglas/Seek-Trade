@@ -78,7 +78,7 @@ public class SearchPostsActivity extends AppCompatActivity {
                     firstFilter = false;
                     secondFilter = false;
                     //Log.e(TAG, "Error fetching post");
-                    if (searchedText.equals("") || eachPost.getTitle().contains(searchedText)) {
+                    if (searchedText.equals("") || eachPost.getTitle().toLowerCase().contains(searchedText.toLowerCase())) {
                         firstFilter = true;
                     }
                     if (searchedCategory.equals("All Categories") || eachPost.getCategory().equals(searchedCategory)) {

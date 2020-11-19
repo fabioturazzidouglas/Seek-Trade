@@ -40,9 +40,6 @@ public class Login extends AppCompatActivity {
         mPass = findViewById(R.id.textPasswordLogIn);
         loginBtn = findViewById(R.id.logInBtn);
         goToReg = findViewById(R.id.textViewToRegister);
-//        getActionBar().setIcon(R.drawable.logo);
-//        getActionBar().setTitle("Seek&Trade App");
-
         fAuth = FirebaseAuth.getInstance();
         progBar = findViewById(R.id.progressBar2);
 
@@ -125,7 +122,7 @@ public class Login extends AppCompatActivity {
 
         Post post1 = new Post("All Categories", "Brand new Bycicle", "Brand new Bycicle, used for a month and decided to sell because I got another one.", 200, user1.getEmail(), "10/10/2020", "Vancouver, BC", "FAS ASD", "images/bike.jpg");
         Post post2 = new Post("Vehicles", "Hyundai 2018", "Hyundai in good condition, from 2018. 10000 miles ran.", 15000, user2.getEmail(), "11/11/2010", "New West, BC", "ASD 142", "images/car.jpg");
-        Post post3 = new Post("Real Estate", "House in New Westminster", "1000 sq feet comfortable house with 3 bedroms, 4 bathrooms and backyard.", 1500000, user3.getEmail(), "10/10/2020", "New West, BC", "V24 AS2", "images/house.jpg");
+        Post post3 = new Post("Real Estate", "House in New Westminster", "1000 sq feet comfortable house with 3 bedroms, 4 bathrooms and backyard.", 900000, user3.getEmail(), "10/10/2020", "New West, BC", "V24 AS2", "images/house.jpg");
         Post post4 = new Post("Electronics", "Gaming PC", "With GTX 2070, 16GB RAM, 1TB SSD", 700, user4.getEmail(), "11/11/2010", "Surrey, BC", "AS3 2D2", "images/PC.jpg");
         Post post5 = new Post("All Categories", "Used Bycicle in good condition", "Used Bycicle in perfect condition.", 100, user5.getEmail(), "10/10/2020", "Vancouver, BC", "FAS ASD", "images/bike.jpg");
         Post post6 = new Post("Electronics", "PS5 - Unique Edition", "PS5, new release by Sony. Comes with one Dualsense controller ", 600, user6.getEmail(), "10/10/2020", "Surrey, BC", "XSA VAS", "images/Ps5.jpg");
@@ -143,5 +140,10 @@ public class Login extends AppCompatActivity {
         for (Post post : allActivePosts) {
             dbHelper.addPost(post, post.getUserEmail());
         }
+
+//        Post updatedPost = dbHelper.getPostById(1);
+//        updatedPost.setTitle("Updated Bycicle");
+//        dbHelper.updatePost(updatedPost);
+
     }
 }
