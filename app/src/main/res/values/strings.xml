@@ -38,6 +38,7 @@
     <string name="searchPosts">Search Posts</string>
     <string name="myProf">My Profile</string>
     <string name="contactUser">Contact this Seller</string>
+    <string name="editProfile">EDIT PROFILE</string>
     <string-array name="PostsCategories">
         <item>All Categories</item>
         <item>Real Estate</item>
