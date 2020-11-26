@@ -50,13 +50,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNoPost" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserName" />
 
     <TextView
         android:id="@+id/textViewNoPost"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:gravity="center"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -66,9 +65,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-<<<<<<< HEAD
         app:layout_constraintTop_toBottomOf="@+id/textViewUserName" />
-=======
+
+    =======
         app:layout_constraintTop_toBottomOf="@+id/listViewListMyPosts" />
 
 

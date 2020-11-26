@@ -108,6 +108,7 @@ public class Login extends AppCompatActivity {
         User user4 = new User("weryr3","Guyn", "10/10/2020", "guyn@hotmail.com");
         User user5 = new User("fafey5w4","Daniil", "10/10/2020", "denngall2@gmail.com");
         User user6 = new User("wrqrqw3","Uyen", "10/10/2020", "uyen@gmail.com");
+        User user7 = new User("pw3o4g","Ann-Mary", "10/10/2020", "ann@gmail.com");
 
         allActiveUsers.add(user1);
         allActiveUsers.add(user2);
@@ -115,6 +116,7 @@ public class Login extends AppCompatActivity {
         allActiveUsers.add(user4);
         allActiveUsers.add(user5);
         allActiveUsers.add(user6);
+        allActiveUsers.add(user7);
 
         for(User user : allActiveUsers) {
             dbHelper.addOrUpdateUser(user);

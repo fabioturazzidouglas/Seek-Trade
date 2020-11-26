@@ -40,11 +40,10 @@ public class PostDetails extends AppCompatActivity {
         TextView textViewPostDate = findViewById(R.id.textViewPostDate);
         TextView textViewCategory = findViewById(R.id.textViewCategory);
         ImageView imageViewPhoto = findViewById(R.id.imageViewPost);
-<<<<<<< HEAD
+
         Button returnBtn = findViewById(R.id.buttonReturn);
-=======
+
         Button btnContactSeller = findViewById(R.id.btnContactUser);
->>>>>>> sendEmail_FEATURE
         fAuth = FirebaseAuth.getInstance();
         //Get instances for FirebaseStorage
         storage = FirebaseStorage.getInstance();
