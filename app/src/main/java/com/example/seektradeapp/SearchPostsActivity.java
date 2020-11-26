@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -56,6 +57,7 @@ public class SearchPostsActivity extends AppCompatActivity {
         EditText searchedTitle = findViewById(R.id.editTextSearch);
         Spinner spinnerCategory = findViewById(R.id.spinnerCategories);
         ImageView toMyPosts = findViewById(R.id.imageViewToMyPosts);
+        ImageView myProfile = findViewById(R.id.imageViewMyProfile);
         //create adapter, pass data
         PostAdapter myPostAdapter = new PostAdapter(allActivePosts, SearchPostsActivity.this);
         //attach adapter to recyclerview
@@ -130,6 +132,12 @@ public class SearchPostsActivity extends AppCompatActivity {
             }
         });
 
+        myProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), UserProfile.class));
+            }
+        });
 
     }
 }
