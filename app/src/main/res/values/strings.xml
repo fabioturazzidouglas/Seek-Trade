@@ -32,7 +32,7 @@
     <string name="btnDeletePost">DELETE POST</string>
     <string name="txtviewCat">Category</string>
     <string name="txtviewNoPost">Have something to sell? Click the ADD button in the tool bar!</string>
-    <string name="txtNopost">You have not posted anything yet. Start posting by using the ADD button below</string>
+    <string name="txtNopost">Have something to sell? Click the Add Post button in the tool bar</string>
     <string name="addPost">Add Post</string>
     <string name="myPosts">My Posts</string>
     <string name="searchPosts">Search Posts</string>

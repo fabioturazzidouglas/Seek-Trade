@@ -109,7 +109,7 @@ public class PostDetails extends AppCompatActivity {
             textViewLocation.setText(thisPost.getAddress());
             textViewDetails.setText(thisPost.getDescription());
             textViewPrice.setText("$ " + thisPost.getPrice());
-            textViewUser.setText(thisUser.getEmail());
+            textViewUser.setText(thisPost.getUserEmail());
             textViewPostDate.setText(thisPost.getPostDate());
             textViewCategory.setText(thisPost.getCategory());
             StorageReference ref = storageReference.child(thisPost.getPhoto());
