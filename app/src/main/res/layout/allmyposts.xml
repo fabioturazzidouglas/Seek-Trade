@@ -11,7 +11,7 @@
         android:layout_weight="0.5"
         android:contentDescription="@string/post_photo"
         android:paddingLeft="10dp"
-        android:paddingRight="0dp"
+        android:paddingRight="10dp"
         app:srcCompat="@drawable/no_images_added" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:id="@+id/imageViewOptionBtn"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.2"
-        android:paddingRight="4dp"
+        android:layout_weight="0.3"
+        android:paddingRight="15dp"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 </LinearLayout>
