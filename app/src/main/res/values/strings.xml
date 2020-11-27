@@ -40,7 +40,50 @@
     <string name="btnReturn">BACK</string>
     <string name="contactUser">Contact this Seller</string>
     <string name="toSearch">Find Posts</string>
->>>>>>> sendEmail_FEATURE
+
+=======
+    <string name="editProfile">EDIT PROFILE</string>
+    <string name="discard">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="delete_profile">Delete Profile</string>
+    <string name="seek_and_trade">Seek and Trade</string>
+    <string name="registration">Registration</string>
+    <string name="full_name">Full Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="have_an_accout_log_in_here">Have an Accout? Log-in Here!</string>
+    <string name="back">Back</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="save">Save</string>
+    <string name="newUserName">New User Name</string>
+    <string name="log_in">Log-In</string>
+    <string name="log_in_string">Log In</string>
+    <string name="don_t_have_an_accout_register_here">Don\'t Have an Accout? Register Here!</string>
+    <string name="logo">logo</string>
+    <string name="nav">nav</string>
+    <string name="nav1">nav1</string>
+    <string name="nav2">nav2</string>
+    <string name="nav3">nav3</string>
+    <string name="nav5">nav5</string>
+    <string name="log_out">Log-out</string>
+    <string name="textview">TextView</string>
+    <string name="date_of_creation">Date of creation</string>
+    <string name="user_email_com">user@email.com</string>
+    <string name="star">star</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="my_posts">My Posts</string>
+    <string name="number_of_posts">Number of posts</string>
+    <string name="log_out_resource">Log-out</string>
+    <string name="post_photo">Post photo</string>
+    <string name="edit_post">edit post</string>
+    <string name="item_photo">item photo</string>
+    <string name="uploaded_photo">uploaded photo</string>
+    <string name="edit_photo">edit photo</string>
+>>>>>>> releaseMergeTesting_FEATURE
     <string-array name="PostsCategories">
         <item>All Categories</item>
         <item>Real Estate</item>

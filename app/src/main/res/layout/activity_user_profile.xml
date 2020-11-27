@@ -30,22 +30,23 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="103dp"
+        android:layout_height="76dp"
         android:layout_marginTop="24dp"
+        android:contentDescription="@string/star"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarPostDetails3"
         app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@android:drawable/btn_star_big_on" />
 
     <TextView
         android:id="@+id/userEmailTxtView"
-        android:layout_width="134dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="user@email.com"
+        android:text="@string/user_email_com"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,15 +81,15 @@
                 android:layout_width="76dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center|left"
-                android:text="Date of creation" />
+                android:gravity="center|start"
+                android:text="@string/date_of_creation" />
 
             <TextView
                 android:id="@+id/dateOfCreationTxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center|right" />
+                android:gravity="center|end" />
         </LinearLayout>
 
         <LinearLayout
@@ -101,15 +102,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center|left"
-                android:text="Last Update" />
+                android:gravity="center|start"
+                android:text="@string/full_name" />
 
             <TextView
-                android:id="@+id/lastUpdateTxtView"
+                android:id="@+id/fullNameProfileTxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center|right" />
+                android:gravity="center|end" />
         </LinearLayout>
 
         <LinearLayout
@@ -123,35 +124,35 @@
                 android:layout_width="75dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center|left"
-                android:text="Number of posts" />
+                android:gravity="center|start"
+                android:text="@string/number_of_posts" />
 
             <TextView
                 android:id="@+id/numberOfPostsTxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center|right" />
+                android:gravity="center|end" />
         </LinearLayout>
 
         <Button
             android:id="@+id/viewMyPostsBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="My Posts" />
+            android:text="@string/my_posts" />
 
         <Button
             android:id="@+id/editProfileBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Edit Profile"
+            android:text="@string/edit_profile"
             app:backgroundTint="#2196F3" />
 
         <Button
             android:id="@+id/deleteProfileBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delete Profile"
+            android:text="@string/delete_profile"
             app:backgroundTint="#DC0A0A" />
     </LinearLayout>
 
@@ -159,7 +160,7 @@
         android:id="@+id/logOutBtnProfileView"
         android:layout_width="231dp"
         android:layout_height="39dp"
-        android:text="Log-out"
+        android:text="@string/log_out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

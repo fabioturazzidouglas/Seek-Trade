@@ -10,8 +10,7 @@
         android:id="@+id/textViewAppName"
         android:layout_width="wrap_content"
         android:layout_height="37dp"
-        android:autoText="false"
-        android:text="Seek and Trade"
+        android:text="@string/seek_and_trade"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Log-In"
+        android:text="@string/log_in"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,12 +40,13 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/textPasswordLogIn"
@@ -57,12 +57,13 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textEmailLogIn" />
+        app:layout_constraintTop_toBottomOf="@+id/textEmailLogIn"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/logInBtn"
@@ -73,7 +74,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
-        android:text="Log In"
+        android:text="@string/log_in_string"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +89,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:text="Don't Have an Accout? Register Here!"
+        android:text="@string/don_t_have_an_accout_register_here"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,6 +113,7 @@
         android:layout_height="200dp"
         android:layout_marginTop="8dp"
         android:alpha="20"
+        android:contentDescription="@string/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"

@@ -57,7 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String CREATE_POSTS_TABLE = "CREATE TABLE " + TABLE_POSTS +
                 "(" +
                 KEY_POST_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + // Define a primary key
-                KEY_POST_USER_EMAIL_FK + " STRING REFERENCES " + TABLE_USERS + "(" + KEY_USER_EMAIL + ")," + // Define a foreign key
+                KEY_POST_USER_EMAIL_FK + " STRING REFERENCES " + TABLE_USERS + "(" + KEY_USER_EMAIL + ") ON DELETE CASCADE," + // Define a foreign key
                 KEY_POST_CATEGORY + " VARCHAR(30)," +
                 KEY_POST_TITLE + " VARCHAR(30)," +
                 KEY_POST_DESCRIPTION + " VARCHAR(100)," +
@@ -463,6 +463,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } finally {
             db.endTransaction();
         }
+    }
+    public void deleteUserWithEmail(String email) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_USERS, "email= ?", new String[]{String.valueOf(email)});
+        db.close();
+
     }
 
 }

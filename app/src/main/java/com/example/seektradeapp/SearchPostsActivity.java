@@ -36,7 +36,6 @@ public class SearchPostsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        //Toast.makeText(SearchPostsActivity.class, "Post created", Toast.LENGTH_LONG).show()\\
         try {
             String title ="";
                     getIntent().getExtras().getString("title");
@@ -61,6 +60,7 @@ public class SearchPostsActivity extends AppCompatActivity {
         ImageView toMyPosts = findViewById(R.id.imageViewToMyPosts);
         Button logOut = findViewById(R.id.logoutBtn);
         ImageView toSearch = findViewById(R.id.imageViewSearchPosts);
+        ImageView myProfile = findViewById(R.id.imageViewMyProfile);
         //create adapter, pass data
         PostAdapter myPostAdapter = new PostAdapter(allActivePosts, SearchPostsActivity.this);
         //attach adapter to recyclerview
@@ -150,6 +150,12 @@ public class SearchPostsActivity extends AppCompatActivity {
             }
         });
 
+        myProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), UserProfile.class));
+            }
+        });
 
     }
 }

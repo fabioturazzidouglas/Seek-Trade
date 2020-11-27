@@ -24,7 +24,7 @@ import java.util.List;
 
 public class Register extends AppCompatActivity {
 
-    EditText newUserFullName, email, pass, confPass, phone;
+    EditText newUserFullName, email, pass, confPass;
     Button regBtn;
     TextView goToLogin;
     FirebaseAuth fAuth;
@@ -41,7 +41,6 @@ public class Register extends AppCompatActivity {
         email = findViewById(R.id.textEmail);
         pass = findViewById(R.id.textPassword);
         confPass = findViewById(R.id.confirmPassword);
-        phone = findViewById(R.id.textPhone);
         regBtn = findViewById(R.id.regBtn);
         goToLogin = findViewById(R.id.textViewToLogin);
 

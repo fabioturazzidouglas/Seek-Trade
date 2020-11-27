@@ -1,9 +1,5 @@
 package com.example.seektradeapp;
 
-
-
-
-
 public class Post {
     private int postId;
     private String category;

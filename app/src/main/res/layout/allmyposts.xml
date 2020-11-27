@@ -9,7 +9,9 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.5"
+        android:contentDescription="@string/post_photo"
         android:paddingLeft="10dp"
+        android:paddingRight="0dp"
         app:srcCompat="@drawable/no_images_added" />
 
     <TextView
@@ -19,13 +21,19 @@
         android:layout_weight="1"
         android:gravity="center_vertical"
         android:paddingLeft="8dp"
-        android:text="TextView" />
+        android:paddingRight="0dp"
+        android:text="@string/textview" />
 
     <ImageView
         android:id="@+id/imageViewOptionBtn"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+<<<<<<< HEAD
         android:layout_weight="0.25"
+=======
+        android:layout_weight="0.2"
+        android:contentDescription="@string/edit_post"
+>>>>>>> releaseMergeTesting_FEATURE
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         app:srcCompat="@android:drawable/ic_menu_edit" />

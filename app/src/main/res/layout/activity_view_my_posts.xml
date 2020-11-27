@@ -13,7 +13,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/btnBack"
         app:backgroundTint="@android:color/holo_blue_light"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+    =======
+>>>>>>> releaseMergeTesting_FEATURE
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,6 +93,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginLeft="28dp"
         android:layout_marginBottom="6dp"
+        android:contentDescription="@string/nav"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageViewToMyPosts"
         app:srcCompat="@android:drawable/ic_menu_add" />
@@ -101,7 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:text="Log-out"
+        android:text="@string/log_out"
         app:backgroundTint="@android:color/holo_blue_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -116,6 +118,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginLeft="28dp"
         android:layout_marginBottom="8dp"
+        android:contentDescription="@string/nav"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageViewSearchPosts"
         app:srcCompat="@android:drawable/ic_menu_agenda" />
@@ -187,6 +190,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginLeft="28dp"
         android:layout_marginBottom="16dp"
+        android:contentDescription="@string/nav"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageViewAddPost"
         app:srcCompat="@drawable/profile_icon" />
@@ -198,6 +202,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginBottom="8dp"
+        android:contentDescription="@string/nav"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/toolbar2"
         app:srcCompat="@android:drawable/ic_menu_search" />
