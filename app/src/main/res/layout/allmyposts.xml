@@ -28,13 +28,7 @@
         android:id="@+id/imageViewOptionBtn"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-<<<<<<< HEAD
-        android:layout_weight="0.25"
-=======
         android:layout_weight="0.2"
-        android:contentDescription="@string/edit_post"
->>>>>>> releaseMergeTesting_FEATURE
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:paddingRight="4dp"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 </LinearLayout>

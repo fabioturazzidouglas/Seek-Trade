@@ -28,7 +28,8 @@ public class ViewMyPosts extends AppCompatActivity {
         setContentView(R.layout.activity_view_my_posts);
 
         TextView txtViewFullName = findViewById(R.id.textViewUserName);
-        ListView listViewAllMyPosts = findViewById(R.id.listViewListMyPosts);;
+        ListView listViewAllMyPosts = findViewById(R.id.listViewListMyPosts);
+        ImageView myProfile = findViewById(R.id.imageViewMyProfile);
         Button backToSearch = findViewById(R.id.btnBackToSearch);
         FirebaseAuth fAuth = FirebaseAuth.getInstance();;
         //get user id/email
@@ -119,6 +120,13 @@ public class ViewMyPosts extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), ViewMyPosts.class));
 
+            }
+        });
+
+        myProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), UserProfile.class));
             }
         });
 
