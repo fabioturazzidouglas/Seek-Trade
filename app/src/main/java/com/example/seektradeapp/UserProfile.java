@@ -63,7 +63,6 @@ public class UserProfile extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getApplicationContext(), SearchPostsActivity.class));
             }
         });
