@@ -1,6 +1,6 @@
 App Name:	Seek & Trade App
 
-Group 4:	Daniil Volovik, Fabio Turazzi, Winnie Nguyen 
+Group 4:	Daniil Volovik, Do Man Uyen Nguyen, Fabio Turazzi
 
 Functions/Description:	
 		Seek & Trade is a Marketplace app which offers a safe platform for users to create and search for posts, 
