@@ -36,7 +36,6 @@ public class SearchPostsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        //Toast.makeText(SearchPostsActivity.class, "Post created", Toast.LENGTH_LONG).show()\\
         try {
             String title ="";
                     getIntent().getExtras().getString("title");

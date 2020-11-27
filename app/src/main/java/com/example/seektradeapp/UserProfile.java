@@ -29,11 +29,6 @@ public class UserProfile extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
 
-//        if(fAuth.getCurrentUser() == null) {
-//            startActivity(new Intent(getApplicationContext(), Login.class));
-//            finish();
-//        }
-
         // get email of current user
         String userEmail = fAuth.getCurrentUser().getEmail();
 

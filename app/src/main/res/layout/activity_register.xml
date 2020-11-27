@@ -10,7 +10,6 @@
         android:id="@+id/textViewAppName"
         android:layout_width="wrap_content"
         android:layout_height="37dp"
-        android:autoText="false"
         android:text="@string/seek_and_trade"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,7 +45,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLogInPage"
-        app:layout_constraintVertical_bias="0.120000005" />
+        app:layout_constraintVertical_bias="0.120000005"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/textEmail"
@@ -64,7 +64,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newUserFullName"
-        app:layout_constraintVertical_bias="0.03" />
+        app:layout_constraintVertical_bias="0.03"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/textPassword"
@@ -82,7 +83,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textEmail"
-        app:layout_constraintVertical_bias="0.03" />
+        app:layout_constraintVertical_bias="0.03"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/confirmPassword"
@@ -100,7 +102,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textPassword"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintVertical_bias="0.035"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/regBtn"
