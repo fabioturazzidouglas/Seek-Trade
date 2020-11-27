@@ -12,13 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SeekTradeApp">
-
-        <activity android:name=".ModifyMyPost"></activity>
+        <activity android:name=".EditProfile"></activity>
+        <activity android:name=".ModifyMyPost" />
         <activity android:name=".ViewMyPosts" />
-        <activity android:name=".UserProfile"></activity>
+        <activity android:name=".UserProfile" />
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,7 +28,6 @@
         <activity android:name=".CreatePostActivity" />
         <activity android:name=".PostDetails" />
         <activity android:name=".SearchPostsActivity" />
-
     </application>
 
 </manifest>
