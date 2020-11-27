@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SeekTradeApp">
-        <activity android:name=".EditProfile"></activity>
+        <activity android:name=".DeleteProfile"></activity>
+        <activity android:name=".EditProfile" />
         <activity android:name=".ModifyMyPost" />
         <activity android:name=".ViewMyPosts" />
         <activity android:name=".UserProfile" />

@@ -28,6 +28,7 @@ public class EditProfile extends AppCompatActivity {
     TextView newUserFullName;
     EditText newFullName, oldPass, newPass, confNewPass;
     ProgressBar progBar;
+    Button backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class EditProfile extends AppCompatActivity {
         DatabaseHelper dbHelper = DatabaseHelper.getInstance(this);
 
         changePassChkBx = findViewById(R.id.resetPasswordChcBx);
+        backBtn = findViewById(R.id.backBtn);
 
         FirebaseAuth fAuth = FirebaseAuth.getInstance();;
         //get user id/email
@@ -55,6 +57,13 @@ public class EditProfile extends AppCompatActivity {
         confNewPass = findViewById(R.id.confirmNewPassword);
 
         saveChanges = findViewById(R.id.saveChangesBtn);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), UserProfile.class));
+            }
+        });
 
         saveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +142,7 @@ public class EditProfile extends AppCompatActivity {
                 }
 
                 dbHelper.addOrUpdateUser(currUser);
+                startActivity(new Intent(getApplicationContext(), UserProfile.class));
             }
         });
 

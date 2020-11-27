@@ -40,6 +40,17 @@
     <string name="contactUser">Contact this Seller</string>
     <string name="toSearch">Find Posts</string>
     <string name="editProfile">EDIT PROFILE</string>
+    <string name="discard">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="delete_profile">Delete Profile</string>
+    <string name="seek_and_trade">Seek and Trade</string>
+    <string name="registration">Registration</string>
+    <string name="full_name">Full Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="have_an_accout_log_in_here">Have an Accout? Log-in Here!</string>
     <string-array name="PostsCategories">
         <item>All Categories</item>
         <item>Real Estate</item>
